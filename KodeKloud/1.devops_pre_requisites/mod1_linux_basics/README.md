@@ -286,7 +286,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
   * install specific version of a package: `yum install package_name-verison`
 
 ## 5. Services:
-<a name='package_managers'></a>
+<a name='services'></a>
 * When any application is installed on the server, that needs to stay running, they are automatically configured on the system as a service.
 * To start that service, you provice the command: `service httpd start`. 'httpd' is a server.
 * The newer method to do this is: `systemctl start httpd`.
