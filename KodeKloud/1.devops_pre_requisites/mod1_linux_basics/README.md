@@ -8,7 +8,7 @@ The topics covered in this module are:
 5. [Services](#services)
 
 ## 1. Working through the CLI:
-<a href='working_through_the_cli'></a>
+<a name=working_through_the_cli></a>
 ### Shell Types:
 The text based command line interface that lets you run commands is called Shell.And there are different kind of shells, and each of them behave differently. Some of them are: Bourne Shell(Sh Shell), C Shell(csh or tcsh) Z Shell(zsh) and Bourne Again Shell(bash).
 You can see the shell you're using in your environment using the command
@@ -126,7 +126,7 @@ cat file_name1    # View the contents of the file
 This will give us a prompt to enter some code. And when we're done, we press the `Ctrl + D` to exit out of the input prompt.
 
 ## 2. VI Editor:
-<a href='vi_editor'></a>
+<a name='vi_editor'></a>
 * VI Editor comes pre-installed with most linux operating systems.
 * To open a file in vi editor, just type the command `vi file_name` in the shell, and your file will open in the vi editor.
 * The VI Editor has two modes of operation: Command mode and Insert mode.
@@ -170,7 +170,7 @@ This will give us a prompt to enter some code. And when we're done, we press the
 * To move your cursor to the next occurance, press `n`.
 
 ## 3. Some more Linux commands:
-<a href='some_more_linux_commands'></a>
+<a name='some_more_linux_commands'></a>
 Some of the additional commands that will server as the building blocks of linux knowledge.
 
 ### Commands associated with User Accounts:
@@ -210,7 +210,7 @@ cpe:/o:centos:centos:8
 ```
 
 ## 4. Package Managers:
-<a href='package_managers'></a>
+<a name='package_managers'></a>
 Package Managers are software that help us install various softwares in Linux Operating System.
 * CentOS uses a package manager called `rmp` which stands for 'Red Hat Package Manager'.
 * A software is bundled using the extension `.rmp`.
@@ -286,4 +286,39 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
   * install specific version of a package: `yum install package_name-verison`
 
 ## 5. Services:
-<a href='package_managers'></a>
+<a name='package_managers'></a>
+* When any application is installed on the server, that needs to stay running, they are automatically configured on the system as a service.
+* To start that service, you provice the command: `service httpd start`. 'httpd' is a server.
+* The newer method to do this is: `systemctl start httpd`.
+* `systemctl` is the command that is used to manage services on a systemd managed servers.
+* Both the above commands serve the same purpose. The 'service' command uses the 'systemctl' utility underneath.
+* To stop a running service, run the command: `systemctl stop httpd`.
+* To check the status of the service, run the command: `systemctl status httpd`.
+* To configure such that the service starts up when the system boots up: `systemctl enable httpd`.
+* To configure such that the service doesn't start up when the system boots up: `systemctl disable httpd`.
+
+### Steps to configure a program as a service:
+* We want the python program saved in `/opt/code/my_app.py` to start up whenever the server/machine boots up.
+* To run this program, the command used is: `/usr/bin/python3 /opt/code/my_app.py`.
+
+**Goal:**
+* When you type the command: `systemctl start my_app`, it'll start our own python application. The same goes for other systemctl commands.
+* For this to work, we need to configure our program as a `systemd service`.
+* We will do this using a 'systemd unit file', which is located on '/etc/systemd/system'.
+* The name of the file should be the name of the service with the extension '.service'.
+* The contents of the file should look like:(my_app.service)
+```
+[Unit]
+Description=My Python Web Application # Meta-data for the service.
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py  # Command to start the service.
+ExecStartPre=/opt/code/configure.sh             # Command before starting the service.
+ExecStartPost=/opt/code/email_status.sh         # Command before after the service.
+Restart=always                                  # If the app crashes, just restart the service.
+
+[Install]
+WantedBy=multi-user.target                      # Starting the service for all users
+```
+* After the file is set-up, we need to run the command: `systemctl daemon-reload`.
+* Now, we have the app, ready to run. We can now perform operations of this app using systemctl command. The app can be enabled and disabled at will.
