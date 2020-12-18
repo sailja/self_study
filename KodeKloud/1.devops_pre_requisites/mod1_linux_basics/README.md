@@ -8,7 +8,7 @@ The topics covered in this module are:
 5. [Services](#services)
 
 ## 1. Working through the CLI:
-< a href='working_through_the_cli' />
+<a href='working_through_the_cli'></a>
 ### Shell Types:
 The text based command line interface that lets you run commands is called Shell.And there are different kind of shells, and each of them behave differently. Some of them are: Bourne Shell(Sh Shell), C Shell(csh or tcsh) Z Shell(zsh) and Bourne Again Shell(bash).
 You can see the shell you're using in your environment using the command
@@ -126,7 +126,7 @@ cat file_name1    # View the contents of the file
 This will give us a prompt to enter some code. And when we're done, we press the `Ctrl + D` to exit out of the input prompt.
 
 ## 2. VI Editor:
-< a href='vi_editor' />
+<a href='vi_editor'></a>
 * VI Editor comes pre-installed with most linux operating systems.
 * To open a file in vi editor, just type the command `vi file_name` in the shell, and your file will open in the vi editor.
 * The VI Editor has two modes of operation: Command mode and Insert mode.
@@ -170,7 +170,7 @@ This will give us a prompt to enter some code. And when we're done, we press the
 * To move your cursor to the next occurance, press `n`.
 
 ## 3. Some more Linux commands:
-< a href='some_more_linux_commands' />
+<a href='some_more_linux_commands'></a>
 Some of the additional commands that will server as the building blocks of linux knowledge.
 
 ### Commands associated with User Accounts:
@@ -210,7 +210,7 @@ cpe:/o:centos:centos:8
 ```
 
 ## 4. Package Managers:
-< a href='package_managers' />
+<a href='package_managers'></a>
 Package Managers are software that help us install various softwares in Linux Operating System.
 * CentOS uses a package manager called `rmp` which stands for 'Red Hat Package Manager'.
 * A software is bundled using the extension `.rmp`.
@@ -286,4 +286,4 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
   * install specific version of a package: `yum install package_name-verison`
 
 ## 5. Services:
-< a href='package_managers' />
+<a href='package_managers'></a>
