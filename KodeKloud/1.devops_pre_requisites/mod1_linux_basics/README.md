@@ -184,7 +184,7 @@ Some of the additional commands that will server as the building blocks of linux
 * **curl:** This command will download files. Syntax: `curl http://www.some-site.com/some-file.txt -o`. `-o` is needed at the end, to save the result to a file, or else this command will display the contents of the file on screen.
 * **wget:** This command is similar to the curl command. Syntax: `wget http://www.some-site.com/some-file.txt -o some-file.txt`. This also needs the name of the file to save the file.
 
-### Chech OS Version:
+### Check OS Version:
 ```bash
 cat /etc/*release*
 ```
