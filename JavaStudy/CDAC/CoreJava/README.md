@@ -226,4 +226,24 @@ public class A{}
 
 * Why is main method static in Java? It is so that the main thread of JVM can call the main method without instantiation.
 
-__TimeStamp: class 1.2, beginning__
+* All java classes, automatically extend/are inherited from `java.lang.Object` class. Thus `java.lang.Object` class is super class of all classes in Java whether it is written by user or given in Java API library. It is root of all class hierarchy in java.
+* The name `java.lang.Object` is called the fully qualified class name. `java.lang` is the name of the package of which the Object class is a part of.
+
+* Let's look at one more program:
+```java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello " + args[0]);
+    }
+}
+```
+When running this program, if we don't pass any value to the command line, it'll give the error:
+```output
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at Hello.main(Hello.java:6)
+```
+This gives an error, because if we don't pass anything when running the program, the args is an empty String array with length as 0. So if we try to access the 1st element of the array, which is not present, it gives `ArrayIndexOutOfBoundsException`.  
+The reason it says Exception in thread "main" is because JVM creates a thread which invokes the main method, and thus it is called "main" thread.  
+And in the above program if we pass anything other than an integer umber as an argument, it'll give an error/Runtime Exception called `java.lang.NumberFormatException`. So if you pass 4 and e, ie, a string which contains a non-parsable integer, it doesn't give the output as 4 + ASCII value of 'e'. 
+
+__TimeStamp: class 1.2, From the beginning__
