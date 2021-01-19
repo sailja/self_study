@@ -5,6 +5,8 @@
     * [JDK vs JRE vs JVM](#jdk_vs_jre_vs_jvm)
     * [JVM Architecture](#jvm_architecture)
     * [More about JIT Compiler](#more_about_jit_compiler)
+    * [Writing the first Java Program](#writing_the_first_java_program)
+    * [How to run Java Program](#how_to_run_java_programs)
 
 ## Day-1
 <a name='day-1'></a>
@@ -113,3 +115,91 @@ Let's look closely at more optimizations done by JIT:
 * The JVM check the method access bit for value __ACC_MACHINE_COMPILED__ to notify the interpreter that the code for this method has already been compiled and stored in the loaded class. 
 * JIT compiler compiles the method block into native code for this method and stores that in the code block for that method. 
 * Once the code has been compiled the __ACC_MACHINE_COMPILED__ bit, which is used on the Sun platform(JVM), is set.
+
+### Writing the first Java Program:
+<a name='writing_the_first_java_program'></a>
+
+```java
+class Hello {
+      public static void main(String[] args) {
+            System.out.println("Hello World");
+      }
+}
+```
+
+__Some Points to Note:__
+* The above code can be saved in any file with an extension of `.java`.
+* When not using any access specifier before the _class_ keywork, it'll use the _default_ access specifer.
+* __Default__ access specifier means that when using or invoking the class with access set to _default_, the class will be visible, or can only be invoked from a different class from the same folder(package) and not from any class outside the folder in which the class in question is.
+* The only two access specifiers which are available on class level:  
+      * __Default__  
+      * __Public__  
+* If the class is created as a public class, you have to name the file of the source code as same name of the class. That's the reason that one `.java` file cannot have more than one public classes.
+* Class is a unit of encapsulation, ie., the data and methods are encapsulated using a class as an encapsulating unit.
+* Norms for naming:   
+      1. The name of the class should begin with an upper case and then go with camel casing.  
+      2. The name of the members(data members and methods) of the class should start with lower case and then go with camel casing.  
+* The __main()__ method in a program is the starting point of execution of any program.
+* Access specifers of the members of the class(data members and methods), in order of access from narrowest to widest, are:   
+      1. __Private__ (Scope: visible within the same class)  
+      2. __Protected__ (Scope: visible only to the subclasses/derived classes)  
+      3. __Default__(package private) (Scope: visible only in the same folder/package)  
+      4. __Public__ (Scope: visible everywhere)  
+* The _static_ keyword in _main()_ method defination means that the _main()_ method can be called without creating an object/without instantiation.
+* _void_ is a keyword used for the return type of the function. _main()_ method returns nothing. This is different from __C/C++__. That's because when running _C/C++_ we're running the code directly on the OS, and it needs a return to know whether the exuction of the program was a success or not. But since Java Programs don't run directly on the platform/OS, rather than a VM, it doesn't need to return anything back to the OS.
+* In the signature of the _main()_ method, it needs a string array as an argument to capture the command line arguments. In Java String is a class in _java.lang_ package, rather than an array of characters like C/C++.
+* The first element of the string argument array is the element that is passes. It doesn't represent the name of the program, like C/C++.
+
+__How `System.out.println()` statement works:__
+* Whenever a new class is created, `java.lang` package is automatically imported.
+* In the `java.lang` package, there is a class called System. 
+* The `System` class has a static data member of type `PrintStream`(from `java.io` package) class called as `out`. 
+* `PrintStream` class has a lot of overloaded method with name `print()/println()` with different type of arguments.
+* Using this data member of the system class, we can call the `print()/println()` method based .
+And that's how the print function works.
+
+### How to run Java programs:
+<a name='how_to_run_java_programs'></a>
+Before compilation of java source code, let's look at the folder structure:  
+_src_: All the source code should be in this directory.  
+_bin_: All the compiled code(intermeditiary byte code/`.class` files) should be saved in this directory.  
+
+Thus, to compile the source code, use this command:
+```bash
+javac -d ../bin Hello.java
+```
+This means that after the compilation, all the `.class` files will be generated in the bin directory.
+To run this program, you have to call the name of the class:
+```bash
+java Hello
+```
+```output
+Hello World
+```
+
+__NOTE:__ Even if your program doesn't have a main method, and you try to run it, it doesn't give any compiler error and gives a `.class` file as an output of the compiler. Java thinks that we're compiling this file to be a part of/to be used in any other package. But if we try to run the code generated, it'll give this error:
+```output
+Error: Main method not found in class Hello, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+```
+And the reason being that inorder to run the code, JVM looks for a special function with a signature: `public static void main(Sting[] args)` in order to run the program.  
+The same happens for any change in the signature of the main function, eg. `public static void main(String args)`, because the argument list doesn't have an array of Strings, but it has a single String parameter.
+
+__NOTE:__ When compiling a single java source file, it'll produce the number of `.class` files as there are classes in the source code. For example:
+```java
+class Hello {
+        public static void main(String[] args) {
+                System.out.println("Hello from main");
+        }
+}
+
+class A{
+      // Empty class
+}
+
+class B{
+      // Empty class
+}
+```
+When we compile the above source file, it'll produce three `.class` files: Hello.java, A.java, B.java. And when we run these, other than Hello, the others give an error, as there is no main method in them.
