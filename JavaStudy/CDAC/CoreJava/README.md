@@ -186,7 +186,9 @@ or a JavaFX application class must extend javafx.application.Application
 And the reason being that inorder to run the code, JVM looks for a special function with a signature: `public static void main(Sting[] args)` in order to run the program.  
 The same happens for any change in the signature of the main function, eg. `public static void main(String args)`, because the argument list doesn't have an array of Strings, but it has a single String parameter.
 
-__NOTE:__ When compiling a single java source file, it'll produce the number of `.class` files as there are classes in the source code. For example:
+__NOTE:__ 
+* One java source file can contain multiple classes.
+* When compiling a single java source file, it'll produce the number of `.class` files as there are classes in the source code. For example:
 ```java
 class Hello {
         public static void main(String[] args) {
@@ -202,4 +204,26 @@ class B{
       // Empty class
 }
 ```
-When we compile the above source file, it'll produce three `.class` files: Hello.java, A.java, B.java. And when we run these, other than Hello, the others give an error, as there is no main method in them.
+* When we compile the above source file, it'll produce three `.class` files: Hello.java, A.java, B.java. And when we run these, other than Hello, the others give an error, as there is no main method in them.
+* When writing a class, if we give the class a public specifier, we'll have to name the file the same as that of the public class. If we don't then we see this error:
+```console
+Hello.java:1: error: class Hello2 is public, should be declared in a file named Hello2.java
+public class Hello2 {
+       ^
+1 error
+```
+* One java source file can never contain more than one public classes, if we do, we see this error:
+```console
+Hello.java:1: error: class Hello2 is public, should be declared in a file named Hello2.java
+public class Hello2 {
+       ^
+Hello.java:7: error: class A is public, should be declared in a file named A.java
+public class A{}
+       ^
+2 errors
+```
+      This is becase when we write a public class, we are exposign a stand-alone functionality, which follows design principle of maximizing cohesion and reducing coupling as much as possible.
+
+* Why is main method static in Java? It is so that the main thread of JVM can call the main method without instantiation.
+
+__TimeStamp: class 1.2, beginning__
