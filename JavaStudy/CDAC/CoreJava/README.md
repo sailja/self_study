@@ -7,22 +7,28 @@
     * [More about JIT Compiler](#more_about_jit_compiler)
     * [Writing the first Java Program](#writing_the_first_java_program)
     * [How to run Java Program](#how_to_run_java_programs)
+    * [Some important notes about Java Source Files](#some_important_notes_about_java_source_files)
+    * [Java Data-Types](#java_data_types)
+    * [Accepting Input using Scanner Class](#accepting_input_using_scanner)
 
 ## Day-1
 <a name='day-1'></a>
 
 ### How Java Programs work:
 <a name='how_java_programs_work'></a>
+
 For any java program to run these are the steps that it needs to follow:
 * Write the source code in a `.java` file. For example, `Hello.java`.
 * The source code, wrote in a `.java` file is compiled using software called compiler.
 * This generates a file with an extension of `.class`. So the file which will be generated will be `Hello.class` for the java source code `Hello.java`. This file is used to run the code.
 * This `.class` file is not meant to run on any particular platform. This means that whether we run the program on a Windows, Mac or Linux platform, it'll run in the same manner.
+* This is the reason why it is said that, write once- run anywhere language.
 
 When we compile the source code, it produces an intermediatory byte code(`.class` file). This intermediatory byte code is not meant for any real platform, but this can only run on __JVM(Java Virtual Machine)__. The __JVM__ is a java runtime environment, which translates from platform independent byte code to platform specific native code. This is called interpretation(runtime translation).
 
 ### Why Java?
 <a name='why_java'></a>
+
 When Starting Java, one thing to understand is- Why Java? What makes the Java Language this popular?
 Some other benefits of using Java:
 * Simple & Robust
@@ -41,6 +47,7 @@ Steps to run a java program:
 
 ### JDK vs JRE vs JVM:
 <a name='jdk_vs_jre_vs_jvm'></a>
+
 ![image](./additional_resources/jdk_vs_jre_vs_jvm.jpg)  
 From the above diagram, we can see that JDK(Java Development Kit) can be divided into two section: _Java DEV Tools_ and _JRE(Java Run-time environment)_.
 
@@ -57,6 +64,7 @@ __NOTE:__ When we write `import java.io.*;` in a java function, it does n't mean
 
 ### JVM Architecture:
 <a name='jvm_architecture'></a>
+
 ![image](./additional_resources/JVM-architecture.png)
 JVM has various sub components internally. 
 
@@ -90,6 +98,7 @@ When class loader loads the classes on JVM, the HotSpot profiler finds out which
 
 ### More about JIT Compiler:
 <a name='more_about_jit_compiler'></a>
+
 The Just In Time Compiler (JIT) concept and more generally adaptive optimization is well known concept in many languages besides Java (.Net, Lua, JRuby).
  
 Compiler is "a computer program that transforms the source language into another computer language (the target language)".
@@ -160,6 +169,7 @@ And that's how the print function works.
 
 ### How to run Java programs:
 <a name='how_to_run_java_programs'></a>
+
 Before compilation of java source code, let's look at the folder structure:  
 _src_: All the source code should be in this directory.  
 _bin_: All the compiled code(intermeditiary byte code/`.class` files) should be saved in this directory.  
@@ -186,7 +196,9 @@ or a JavaFX application class must extend javafx.application.Application
 And the reason being that inorder to run the code, JVM looks for a special function with a signature: `public static void main(Sting[] args)` in order to run the program.  
 The same happens for any change in the signature of the main function, eg. `public static void main(String args)`, because the argument list doesn't have an array of Strings, but it has a single String parameter.
 
-__NOTE:__ 
+### Some important notes about java program source files:
+<a name='some_important_notes_about_java_source_files'></a>
+
 * One java source file can contain multiple classes.
 * When compiling a single java source file, it'll produce the number of `.class` files as there are classes in the source code. For example:
 ```java
@@ -246,4 +258,81 @@ This gives an error, because if we don't pass anything when running the program,
 The reason it says Exception in thread "main" is because JVM creates a thread which invokes the main method, and thus it is called "main" thread.  
 And in the above program if we pass anything other than an integer umber as an argument, it'll give an error/Runtime Exception called `java.lang.NumberFormatException`. So if you pass 4 and e, ie, a string which contains a non-parsable integer, it doesn't give the output as 4 + ASCII value of 'e'. 
 
-__TimeStamp: class 1.2, From the beginning__
+### Java Data-Types:
+<a name='java_data_types'></a>
+
+The summary of the java data-types has been described in the image below:
+![image](./additional_resources/java_data_types.jpg)
+
+### Accepting Input using Scanner Class:
+<a name='accepting_input_using_scanner'></a>
+
+#### Why Scanner?
+* Scanner Class is used to take input other than command line arguments. 
+* The other benefit of using Scanner Class is that we don't have to parse the entered element every time we want the data to be in a type other than String.
+* With Scanner Class, we can take inputs while the program is running. It doesn't always have to be at the beginning when running the program.
+
+#### What is Scanner?
+* Part of `java.util` package.
+* Scanner class can be called as a parser which has an inherent Buffer build into it.
+* Scanner can be attached to either a standard input like keyboard, or a text file and it'll work the same way for both of them.
+* Scanner can also be attached to a socket to accept/read strings directly from the sockets.
+* The default delimiter for a token in the Scanner Buffer is space.
+
+#### Writing the first program using Scanner to take input:
+```java
+/**
+ * Problem statement: Take a number as an input using scanner and test whether 
+ */
+import java.util.Scanner;
+public class TestEven {
+    public static void main(String[] args) {
+
+        // Instantiating the Scanner class, since the methods we'll use are non-static methods
+        Scanner sc = new Scanner(System.in);
+        int num;
+        System.out.println("Enter a number to test even or not:");
+
+        // sc.hasNextInt(): Test if the data input in the buffer Integer or not
+        if(sc.hasNextInt()) {
+
+            //sc.nextInt(): Read the data input in the buffer as an integer  -- Blocking Method
+            num = sc.nextInt();
+
+            if(num % 2 == 0) {
+                System.out.println("The number input is even.");
+            } else {
+                System.out.println("The number input is odd.");
+            }
+        } else {
+            System.out.println("The data entered is not a number and hence is not parsable.");
+        }
+
+        // Need to close the handler to the Scanner Buffer.
+        sc.close();
+    }
+}
+```
+__NOTE:__ If we don't use the `hasNextInt()` method, and we input data other than integer, then it'll give an error of `InputMisMatchException`:
+```output
+Enter a number to test even or not:
+a
+Exception in thread "main" java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:939)
+	at java.base/java.util.Scanner.next(Scanner.java:1594)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2258)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2212)
+	at TestEven.main(TestEven.java:17)
+```
+So, the `hasNextInt()` method is used to make it failsafe.
+
+
+Some other Scanner functions for different data-types:
+* boolean: hasNextBoolean(), nextBoolean().
+* byte: hasNextByte(), nextByte().
+* short: hasNextShort(), nextShort().
+* int: hasNextInt(), nextInt().
+* long: hasNextLong(), nextLong().
+* float: hasNextFloat(), nextFloat().
+* double: hasNextDouble(), nextDouble().
+* String: hasNext(), next().
