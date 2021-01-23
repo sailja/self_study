@@ -340,3 +340,5 @@ Some other Scanner functions for different data-types:
 
 # Day-2:
 <a name='day-2'></a>
+
+__time-stamp: 1st day class-work and assignments__
