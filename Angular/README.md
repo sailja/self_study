@@ -1,11 +1,24 @@
 # Contents:
 1. [Getting Started](#getting_started)
+2. [The Basics](#the_basics)
+3. [Components & Databinding](#components_&_databinding)
+4. [Directives](#directives)
+5. [Services & Dependency Injection](#)
+6. [Routing](#)
+7. [Observables](#)
+8. [Forms](#)
+9. [Pipes](#)
+10. [Http](#)
+11. [Authentication](#)
+12. [Optimizations & NgModules](#)
+13. [Deployment](#)
+14. [Animations & Testing](#)
 
-## Getting Started?
+# 1. Getting Started?
 <a name='getting_started'></a>
 
 Angular is a JavaScript Framework which allows us to create reactive Single-Page-Applicaitons.
-### Creating a new project:
+## Creating a new project:
 ```shell
 $ng new my-first-app
 ```
@@ -57,3 +70,27 @@ export class AppComponent {
   title = 'my-first-app';
 }
 ```
+## Making small changes to the app:
+_Problem Statement:_ Make changes to the app, so that there is an input box and when we enter something in that input box, it displays the same in a paragraph below that.  
+Changes that need to be made:  
+* __app.component.html:__ Replace the old code with the below text:
+```html
+<input type="text" [(ngModel)]="name">
+<p>{{ name }}</p>
+```
+* __app.component.ts:__ In the class appcomponent, change the name of the variable to `name` from title.
+* __app.module.ts:__  These lines need to be added to the file:
+```typescript
+import {FormsModule} from '@angular/forms';
+
+// Add FormsModule to the imports
+imports: [
+    BrowserModule,
+    FormsModule
+  ]
+```
+This solves our task required. More on what each thing does later.
+
+## What is TypeScript?
+* TypeScript is a superset of JavaScript. It offers more feature than vanilla JS-- Types- Strong Typing, Classes, Interfaces, etc. 
+* TypeScript doesn't run on the browser, thus it is compiled to JavaScript, which is done by the Angular CLI.
