@@ -155,6 +155,7 @@ __Some Points to Note:__
       2. __Protected__ (Scope: visible only to the subclasses/derived classes)  
       3. __Default__(package private) (Scope: visible only in the same folder/package)  
       4. __Public__ (Scope: visible everywhere)  
+* Method local variables cannot have any access specifiers, because as the method local variables should only be accessible in a single method, when we try to add access specifiers to that we're trying to alter the scope of that variable. We're trying to expand it's scope beyond that method. Thayt's why it's not allowed.  
 * The _static_ keyword in _main()_ method defination means that the _main()_ method can be called without creating an object/without instantiation.
 * _void_ is a keyword used for the return type of the function. _main()_ method returns nothing. This is different from __C/C++__. That's because when running _C/C++_ we're running the code directly on the OS, and it needs a return to know whether the exuction of the program was a success or not. But since Java Programs don't run directly on the platform/OS, rather than a VM, it doesn't need to return anything back to the OS.
 * In the signature of the _main()_ method, it needs a string array as an argument to capture the command line arguments. In Java String is a class in _java.lang_ package, rather than an array of characters like C/C++.
@@ -341,4 +342,11 @@ Some other Scanner functions for different data-types:
 # Day-2:
 <a name='day-2'></a>
 
-__time-stamp: 1st day class-work and assignments__
+## Rules for naming an identifier:
+All variable names must begin with a letter of the alphabet, an underscore ( _ ), or a dollar sign ($).  
+Can't begin with a digit.  The rest of the characters may be any of those previously mentioned plus the digits 0-9.  
+Can't use a keyword as an identifier.
+
+The convention is to always use a (lower case) letter of the alphabet. 
+The dollar sign and the underscore are discouraged.
+__time-stamp: class 2.1: 31:00__
