@@ -28,6 +28,8 @@ class Menu {
             System.out.println("Enter 0 to exit and calculate.");
 
             System.out.println("Enter your choice:");
+
+            // Cleaning the buffer if anything else entered other than Integer
             if(!sc.hasNextInt()) {
                 System.out.println("The data entered is not a valid input for the condition.\nPlease enter again.\n\n");
                 sc.next();
@@ -95,6 +97,8 @@ class Menu {
 
             System.out.println("The item chosen is: " + foodItem);
             System.out.println("Enter the number of this item you need: ");
+
+            // Cleaning the buffer if anything else entered other than Integer
             if (! sc.hasNextInt()) {
                 System.out.println("The choice made is not a valid choice. \nPlease enter again.\n\n");
                 sc.next();
