@@ -23,7 +23,7 @@ Angular is a JavaScript Framework which allows us to create reactive Single-Page
 $ng new my-first-app
 ```
 Running this command will create a new project. It will ask a few questions around bindings, routing and styling. Choose as per your preference, and voila- your project is ready.  
-  
+
 After the project is build, go to that directory and run the command `ng serve` to start the application.
 ```shell
 $cd my-first-app
@@ -40,7 +40,7 @@ In src directory, there is another directory called 'app'. This directory saves 
 The file _app.component.html_ will be rendered on the browser. The file _app.component.ts_ will be converted into javascript and will be part of the script that will be imported into the static file.
 
 ## How Angular works:
-Now looking at the rendered page in the browser, the html code for that is: 
+Now looking at the rendered page in the browser, the html code for that is:
 ```html
 <!doctype html>
 <html lang="en">
@@ -92,7 +92,7 @@ imports: [
 This solves our task required. More on what each thing does later.
 
 ## What is TypeScript?
-* TypeScript is a superset of JavaScript. It offers more feature than vanilla JS-- Types- Strong Typing, Classes, Interfaces, etc. 
+* TypeScript is a superset of JavaScript. It offers more feature than vanilla JS-- Types- Strong Typing, Classes, Interfaces, etc.
 * TypeScript doesn't run on the browser, thus it is compiled to JavaScript, which is done by the Angular CLI.
 
 # 2. The Basics:
@@ -122,7 +122,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component'; 
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -147,7 +147,7 @@ export class AppModule { }
 })
 ```
 * The value in the selector object is the tag that is going to be replaced from the `index.html` file. And the page given in the templateUrl will be the replacement.  
-* So, if you change the contents of the file `app.component.html`, the contents rendered on the browser changes. 
+* So, if you change the contents of the file `app.component.html`, the contents rendered on the browser changes.
 * And how this happens is when we type the command `ng serve`, the CLI creates javascript bundles by compiling the above files and does the automatic imports of the right bundled scripts where the tag is given in the `index.html`.  
 
 ## A detailed look at Components(@Component):
@@ -207,11 +207,42 @@ __NOTE:__
 * While importing the classes/files, we don't need to add extensions because they will be added automatically by Webpack when it bundles the application.
 * The import section in the decorator `@NgModule` allows us to add other modules to this module for use.  
 
-## Creating a new component using the Angular CLI:
+### Creating a new component using the Angular CLI:
 To create a new component, the command used is:  
 ```bash
 $ng generate component servers
-  #or 
+  #or
 $ng g c servers
 ```
-This also takes care of importing and registering the component in the module. The only thing that will be left will be to add the selector in the file `app.component.html`.
+This also takes care of importing and registering the component in the module. The only thing that will be left will be to add the selector in the file `app.component.html`.  
+
+### Using inline template:
+Replace the `templateUrl` section in the `@Component` decorator with just `template` and we don't need an additional `.html` file for templating. Example:
+```typescript
+@Component({
+  selector: 'app-server',
+  template: '<app-server></app-server>',
+  style: ''
+})
+```
+To use multi-line strings, use backtics. For using styles, use either styleUrl or styles for inline, which take an array for css styles.  
+
+### Different selector:
+The selectors don't just need to be an HTML tag. If you want to use the selector as an attribute, use selector as:
+```TypeScript
+@Component({
+  selector: '[app-servers]',
+  templateUrl: './server.component.html',
+  styleUrl: './servers.component.css'
+})
+```
+For this selector to work, the HTML should look like: `<div app-servers></div>`. This will work for all the selectors that have the attribute: `app-servers`.  
+The same goes for class:
+```TypeScript
+@Component({
+  selector: '.app-servers',
+  templateUrl: './server.component.html',
+  styleUrl: './servers.component.css'
+})
+```
+For this selector to work, the HTML should look like: `<div class="app-servers"></div>`. This will work for all the selectors that have the attribute: `app-servers`.  
