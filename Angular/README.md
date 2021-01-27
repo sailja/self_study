@@ -246,3 +246,10 @@ The same goes for class:
 })
 ```
 For this selector to work, the HTML should look like: `<div class="app-servers"></div>`. This will work for all the selectors that have the attribute: `app-servers`.  
+
+## Data-Binding:
+Databinding means the communication between the typescript code(i.e. the business logic) and the HTML template.  
+![image](./additional_resources/databinding1.png)   
+There is also a combination of both: Two-Way-Binding( `[ngModel]="data"` ).  
+
+### String Interpolation:
