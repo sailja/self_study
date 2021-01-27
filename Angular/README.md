@@ -187,7 +187,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // New Addition:
-import { ServerComponent } from './server/server.component';  // .ts not needed
+import { ServerComponent } from './server/server.component';
 
 @NgModule({
   declarations: [
@@ -202,8 +202,16 @@ import { ServerComponent } from './server/server.component';  // .ts not needed
 })
 export class AppModule { }
 ```
+* To use this Component, we need to add the selector as an html tag in the file `app.component.html`. This will display the contents of the file `server.component.html` on the browser.  
 __NOTE:__   
 * While importing the classes/files, we don't need to add extensions because they will be added automatically by Webpack when it bundles the application.
 * The import section in the decorator `@NgModule` allows us to add other modules to this module for use.  
 
-Upto this point, the Component is created and registered in the module. To use this Component, we need to add the selector as an html tag in the file `app.component.html`. This will display the contents of the file `server.component.html` on the browser.
+## Creating a new component using the Angular CLI:
+To create a new component, the command used is:  
+```bash
+$ng generate component servers
+  #or 
+$ng g c servers
+```
+This also takes care of importing and registering the component in the module. The only thing that will be left will be to add the selector in the file `app.component.html`.
