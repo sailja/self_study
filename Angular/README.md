@@ -148,4 +148,62 @@ export class AppModule { }
 ```
 * The value in the selector object is the tag that is going to be replaced from the `index.html` file. And the page given in the templateUrl will be the replacement.  
 * So, if you change the contents of the file `app.component.html`, the contents rendered on the browser changes. 
-* And how this happens is when we type the command `ng serve`, the CLI creates javascript bundles by compiling the above files and does the automatic imports of the right bundled scripts where the tag is given in the `index.html`.
+* And how this happens is when we type the command `ng serve`, the CLI creates javascript bundles by compiling the above files and does the automatic imports of the right bundled scripts where the tag is given in the `index.html`.  
+
+## A detailed look at Components(@Component):
+* Components are a key feature in Angular. The whole application is built using a couple of components, which we create.  
+* We start with the AppComponent or the root component which holds the entire application.  
+* We'll be adding or nesting other components to this AppComponent. We can divide the screen into multiple components like header, main area, sidebar, footer, etc. and each component will have it's own html, styling and business logic.  
+* And this allows us to split up the application into multiple reusable components which can be used more than once.  
+
+## Creating a new component:
+* AppComponent is a special component which angular bootstraps to start the application.  
+* The selector of AppComponent(`<app-root></app-root>`) lies on the `index.html` but all the other components we create, their selector won't be added to the `index.html` but to the `app.component.html` file.  
+* Usually, for a new component, there is a new directory(name of the component) in the app directory which has all it's component files.  
+* In this directory we create new files. For example, the name of our component is `server`, so the name of the files should be `server.component.ts` & `server.component.html`.  
+* The contents of the `server.component.ts` file should be:
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-server',
+  templateUrl: './server.component.html'
+})
+export class ServerComponent {
+
+}
+```
+* The contents of the `server.component.html` file should be:
+```html
+<h2>Testing how the Components work in Angular</h2>
+```
+__NOTE:__ Angular uses components to build webpages and uses modules to bundle different pieces(for example Components) of the app called packages.   
+* To use this Component, we need to register in the AppModule and thus `app.module.ts` needs a little change, as by default Angular doesn't scan all the files.  
+* The Components will be added to the `declaration` section of the `@NgModule` decorator. For this, we need to first import the component:
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+// New Addition:
+import { ServerComponent } from './server/server.component';  // .ts not needed
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ServerComponent // New Addition
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+__NOTE:__   
+* While importing the classes/files, we don't need to add extensions because they will be added automatically by Webpack when it bundles the application.
+* The import section in the decorator `@NgModule` allows us to add other modules to this module for use.  
+
+Upto this point, the Component is created and registered in the module. To use this Component, we need to add the selector as an html tag in the file `app.component.html`. This will display the contents of the file `server.component.html` on the browser.
