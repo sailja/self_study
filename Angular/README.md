@@ -253,3 +253,60 @@ Databinding means the communication between the typescript code(i.e. the busines
 There is also a combination of both: Two-Way-Binding( `[ngModel]="data"` ).  
 
 ### String Interpolation:
+String Interpolation means that if we want to populate some dynamic value to HTML template, I have to use that in the format: {{ data-variable }}. Example:
+In server.component.ts:
+```TypeScript
+export class ServerComponent {
+  serverId: number = 10;
+  serverStatus: string = 'Offline';
+}
+```
+Inorder to display that in the HTML page, we have to make changes in the file server.component.html as:
+```HTML
+<h5>Status of server with ID: {{ serverId }} is: {{ serverStatus }}</h5>
+```
+This is called String Interpolation is because the statement given between the curly braces(`{{}}`) should result in a string. That can be a string directly or a function call as well that can return string or something which can be converted to a string.  
+The restriction to using this is that we cannot use multi-line expressions in between the curly braces.
+
+### Property Binding:
+We use property binding to make make changes to some property dynamically. It is done using square brackets.
+For example:
+```html
+<button type="button" name="button" class="btn btn-primary" [disabled]="allowNewServer">Add Server</button>
+```
+And the contents of the class should be:
+```typescript
+allowNewServer: boolean = false;
+constructor() {
+  setTimeout(() => {
+    this.allowNewServer = true;
+  }, 5000);
+}
+```  
+After this, the button will disable after five seconds automatically. Thus we have bound an attribute to a property/variable. This is called property binding.
+
+### Property Binding vs String Interpolation:
+String Interpolation should be used when we want to output something or print some text. If a change to a property is needed, whether be it of HTML element or that of a directive or a component, then property binding should be used.
+
+## Reacting to Events(Event Binding):
+Some methods/logic can be bound to some HTML events using the event binding mechanism. For example:
+```HTML
+<button type="button" name="button" class="btn btn-primary"
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()">Create Server</button>
+<hr>
+{{ serverCreationStatus }}
+```
+The code behind this is:
+```TypeScript
+allowNewServer: boolean = false;
+serverCreationStatus = '----No Server was created.----';
+constructor() {
+  setTimeout(() => {
+    this.allowNewServer = true;
+  }, 5000);
+}
+onCreateServer() {
+  this.serverCreationStatus = 'Server was created.';
+}
+```
