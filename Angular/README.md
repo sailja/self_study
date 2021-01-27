@@ -94,3 +94,58 @@ This solves our task required. More on what each thing does later.
 ## What is TypeScript?
 * TypeScript is a superset of JavaScript. It offers more feature than vanilla JS-- Types- Strong Typing, Classes, Interfaces, etc. 
 * TypeScript doesn't run on the browser, thus it is compiled to JavaScript, which is done by the Angular CLI.
+
+# 2. The Basics:
+<a href='the_basics'></a>
+
+## How the application starts/works?
+* `main.ts` is the first file to compile when we type in the command `ng serve`.  
+* __main.ts:__  
+```typescript
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+* Here we're importing the module from the app directory, and then the line `platformBrowserDynamic().bootstrapModule(AppModule)` bootstaps the application module, i.e., it starts up the application module.  
+* `main.ts` bootstraps the AppModule using `app.module` which is the file `app.module.ts`.  
+* In __app.module.ts:__
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component'; 
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+```  
+* `app.module.ts` imports and bootstraps a specific component using `app.component`, both `app.component.html` and `app.component.ts`.  
+* The file that is rendered is the `index.html` file in the src directory. But how this works is, in the index.html file, there is a tag given as `<app-root></app-root>`. In the file `app.component.ts`, there is a section of code:
+```typescript
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+```
+* The value in the selector object is the tag that is going to be replaced from the `index.html` file. And the page given in the templateUrl will be the replacement.  
+* So, if you change the contents of the file `app.component.html`, the contents rendered on the browser changes. 
+* And how this happens is when we type the command `ng serve`, the CLI creates javascript bundles by compiling the above files and does the automatic imports of the right bundled scripts where the tag is given in the `index.html`.
