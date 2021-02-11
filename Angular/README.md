@@ -96,7 +96,7 @@ This solves our task required. More on what each thing does later.
 * TypeScript doesn't run on the browser, thus it is compiled to JavaScript, which is done by the Angular CLI.
 
 # 2. The Basics:
-<a href='the_basics'></a>
+<a name='the_basics'></a>
 
 ## How the application starts/works?
 * `main.ts` is the first file to compile when we type in the command `ng serve`.  
