@@ -285,10 +285,10 @@ constructor() {
 ```  
 After this, the button will disable after five seconds automatically. Thus we have bound an attribute to a property/variable. This is called property binding.
 
-### Property Binding vs String Interpolation:
+#### Property Binding vs String Interpolation:
 String Interpolation should be used when we want to output something or print some text. If a change to a property is needed, whether be it of HTML element or that of a directive or a component, then property binding should be used.
 
-## Reacting to Events(Event Binding):
+### Reacting to Events(Event Binding):
 Some methods/logic can be bound to some HTML events using the event binding mechanism. For example:
 ```HTML
 <button type="button" name="button" class="btn btn-primary"
@@ -310,7 +310,7 @@ onCreateServer() {
   this.serverCreationStatus = 'Server was created.';
 }
 ```
-### Passing and Using Data with Event Binding:
+#### Passing and Using Data with Event Binding:
 This is done by using the keyword: `$event`. `$event` is a special reserved keyword which we can be used in the template during event binding.  
 For this, we can use the same example we used in the earlier section to learn this:  
 ```HTML
@@ -344,7 +344,7 @@ The code behind this will be:
 ```
 So if we enter in the input field as _Test-Server_, the value of `this.serverName` will be the text that we entered in the text field. This is how the data flow works with event binding.
 
-## Two way Binding:
+### Two way Binding:
 With two-way data binding, we combine the property and event binding. This is done by combining syntaxes as well- `[()]` and using a special directive called ngModel. How to use this:
 ```HTML
 <label for="testing">Server</label>
@@ -377,3 +377,83 @@ __NOTE:__ Review on what different binding looks like:
 4. Two-way Binding(Property + Event binding): Used to bind an event to an attribute. We don't need to use a separate function to set properties for this to work. Achieved by using `[()]` and a directive called `ngModel`.
 
 __All the above bindings can only be bound to either inline single line code snippets or to the class level properties.__
+
+## Directives:
+Directives are instructions in the DOM. For example, components are instructions to DOM.  When we add a selector in the template file, we are asking Angular to update the DOM with our own template and business logic in this place and thus updating/instructing DOM to perform some actions. @Components are directives with templates. There are also other directives without templates. Typically most of the directory use attribute selectors.
+
+Using some inbuilt directives are:
+1.  __ngIf:__ Output data conditionally.  
+    Usage: 
+    ```HTML
+    <label for="test">Server Name:</label>
+    <input type="text" name="test" id="test" [(ngModel)]="serverName">
+    <button [disabled]="!serverName" (click)="onCreateServer()">Enter</button>
+
+    <p *ngIf="isServerCreated">Server was created. Server name is: {{ serverName }} </p>
+    ```
+
+    ```TypeScript
+    serverName: String = '';
+    isServerCreated: boolean = false;
+    onCreateServer(): void {
+      this.isServerCreated = true;
+    }
+    ```
+    In this HTML file, we are using ngIf and based on the condition/value in the quotes of ngIf, it displays the paragraph element or not. A `*` is needed here because this is a structural directive as it makes changes to the DOM.   
+      
+2. __ngIf with else:__ For this we'll use the local reference(noServer) after the ngIf component. Usage:
+    ```HTML
+    <label for="test">Server Name:</label>
+    <input type="text" name="test" id="test" [(ngModel)]="serverName">
+    <button [disabled]="!serverName" (click)="onCreateServer()">Enter</button>
+
+    <p *ngIf="isServerCreated; else noServer">Server was created. Server name is: {{ serverName }} </p>
+    <ng-template #noServer>
+      <p>No Server was created.</p>
+    </ng-template>
+    ```
+    This is how ngIf is most used in templates.       
+
+3. __ngStyle:__ This is an attribute directive rather than a structural directive like ngIf. The attribute directive just change the element they are placed on. We don't use * here for this directive.
+    Usage:
+    ```HTML
+    <p [ngStyle]="{'backgroundColor': getColor()}">{{ 'Server' }} with server ID: {{ serverId }}  is {{ getServerStatus() }}</p>
+    ```
+    The [] are not part of the directive name, but we're doing property binding of the property to this directive. The above statement shows background color based on the response from the function `getColor()`:
+    ```TypeScript
+    
+    serverId: number = 10;
+    serverStatus: String = 'offline';
+    constructor() { 
+      this.serverStatus = Math.random() > 0.5? 'online' : 'offline';
+    }
+
+    ngOnInit(): void {
+    }
+
+    getServerStatus(): String {
+      return this.serverStatus;
+    }
+
+    getColor(): String {
+      return this.serverStatus === 'online' ? 'green' : 'red';
+    }
+    ```  
+
+4. __ngClass:__ This is somewhat related to ngStyle. This is also an attribute directive. ngStyle allowed us to change the CSS styles itself, ngClass allows us to add/remove CSS classes. This also works using property binding. 
+    Usage:
+    ```HTML
+    <p [ngStyle]="{'backgroundColor': getColor()}"
+    [ngClass]="{onine: getServerStatus() === 'onine'}">
+      {{ 'Server' }} with server ID: {{ serverId }}  is {{ getServerStatus() }}
+    </p>
+    ```
+
+5. __ngFor:__ Print the HTML modules/DOM multiple times elements based on certain business logic.
+    Usage:
+    ```HTML
+    <p *ngFor="let server of servers"> {{ server }} </p>
+    ```
+    ```TypeScript
+    servers = ['TestSerer-1', 'TestSerer-2', 'TestSerer-3', 'TestSerer-4', 'TestSerer-5'];
+    ```
