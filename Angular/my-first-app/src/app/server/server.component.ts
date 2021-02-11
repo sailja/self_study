@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
 export class ServerComponent {
     
     isDisable: boolean = true;
-    serverName: String = null;
+    serverName: String = "Test-Server";
     serverCreationStatus: String = "No Server was created";
 
     constructor() {
@@ -20,7 +20,7 @@ export class ServerComponent {
         this.serverCreationStatus = "Server was created. Name: " + this.serverName;
     }
 
-    onUpdateServerName(event:any ) {
-        this.serverName = event.target.value;
-    }
+    // onUpdateServerName(event:any ) {
+    //     this.serverName = event.target.value;
+    // }
 }

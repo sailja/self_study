@@ -310,12 +310,6 @@ onCreateServer() {
   this.serverCreationStatus = 'Server was created.';
 }
 ```
-
-__NOTE:__ Until this point, a few things to remember what things to use when binding:  
-* {{ }} -> String Interpolation. Used to display information on the web page.
-* [] -> Property Binding. Used to bind an HTML tag/action to a property/variable of the same class.
-* () -> Event Binding. Used to tie an action to an event occured on the HTML page.
-* All the above three can only be bound to either inline single line code snippets or to the class level properties.
 ### Passing and Using Data with Event Binding:
 This is done by using the keyword: `$event`. `$event` is a special reserved keyword which we can be used in the template during event binding.  
 For this, we can use the same example we used in the earlier section to learn this:  
@@ -349,3 +343,37 @@ The code behind this will be:
   }
 ```
 So if we enter in the input field as _Test-Server_, the value of `this.serverName` will be the text that we entered in the text field. This is how the data flow works with event binding.
+
+## Two way Binding:
+With two-way data binding, we combine the property and event binding. This is done by combining syntaxes as well- `[()]` and using a special directive called ngModel. How to use this:
+```HTML
+<label for="testing">Server</label>
+<input type="text" name="testing" id="testing" class="form-control" [(ngModel)]="serverName">
+{{ serverName }}
+<button class="btn btn-primary" [disabled]="isDisable" (click)="onCreateServer()">Add Server</button>
+
+{{ serverCreationStatus }}
+```
+What this does is this input field along with the input event is bound to the property called `serverName`. And since it is directly bound to the property, we no longer need the function called `onUpdateServerName()`. The input field will be pre-populated with the default value given to the property `serverName`. How the back-ground code looks like:
+```TypeScript
+isDisable: boolean = true;
+  serverName: String = "Test-Server";
+  serverCreationStatus: String = "No Server was created";
+
+  constructor() {
+      setTimeout(() => {
+          this.isDisable = false;
+      }, 5000);
+  }
+
+  onCreateServer(): void {
+      this.serverCreationStatus = "Server was created. Name: " + this.serverName;
+  }
+```
+__NOTE:__ Review on what different binding looks like:
+1. String interpolation: Used to display some information on the screen. Achieved by using `{{ }}`. Can perform single line code in between this, but should return string.
+2. Property Binding: Used to bind an HTML tag/attribute to a property/variable of the same class. Achieved by using `[]`.  
+3. Event Binding: Used to tie an action to an event occured on the HTML page and bind it to a function on the class to perform that action. Achieved by using `()`.  
+4. Two-way Binding(Property + Event binding): Used to bind an event to an attribute. We don't need to use a separate function to set properties for this to work. Achieved by using `[()]` and a directive called `ngModel`.
+
+__All the above bindings can only be bound to either inline single line code snippets or to the class level properties.__
