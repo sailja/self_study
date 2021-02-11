@@ -379,7 +379,7 @@ __NOTE:__ Review on what different binding looks like:
 __All the above bindings can only be bound to either inline single line code snippets or to the class level properties.__
 
 ## Directives:
-Directives are instructions in the DOM. For example, components are instructions to DOM.  When we add a selector in the template file, we are asking Angular to update the DOM with our own template and business logic in this place and thus updating/instructing DOM to perform some actions. @Components are directives with templates. There are also other directives without templates. Typically most of the directory use attribute selectors.
+Directives are instructions to the DOM. For example, components are instructions to DOM.  When we add a selector in the template file, we are asking Angular to update the DOM with our own template and business logic in this place and thus updating/instructing DOM to perform some actions. @Components are directives with templates. There are also other directives without templates. Typically most of the directives use attribute selectors.
 
 Using some inbuilt directives are:
 1.  __ngIf:__ Output data conditionally.  
@@ -453,6 +453,13 @@ Using some inbuilt directives are:
     Usage:
     ```HTML
     <p *ngFor="let server of servers"> {{ server }} </p>
+    ```
+    ```TypeScript
+    servers = ['TestSerer-1', 'TestSerer-2', 'TestSerer-3', 'TestSerer-4', 'TestSerer-5'];
+    ```  
+    Inorder to get the index during run-time: add a new entry in the ngFor: `let i = index`. The `= index` is a reserved keyword to get the index of the current iteration. Usage:
+    ```HTML
+    <p *ngFor="let server of servers; let i = index"> {{ i = server }} </p>
     ```
     ```TypeScript
     servers = ['TestSerer-1', 'TestSerer-2', 'TestSerer-3', 'TestSerer-4', 'TestSerer-5'];
