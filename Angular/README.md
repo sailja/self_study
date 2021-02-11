@@ -27,7 +27,7 @@ Running this command will create a new project. It will ask a few questions arou
 After the project is build, go to that directory and run the command `ng serve` to start the application.
 ```shell
 $cd my-first-app
-$ng server
+$ng serve
 ```
 This will start the application on port 4200 by default.
 
@@ -57,7 +57,7 @@ Now looking at the rendered page in the browser, the html code for that is:
 </html>
 ```
 The html file used is the __index.html__ in the _src_ directory, without the inclusion of script tags- which are injected automatically by angular by compiling __app.component.ts__.   
-Here we can see that there is a tag called <app-root></app-root>. And when taking a look at the file _app.component.ts_, it has a component called `app-root`:
+Here we can see that there is a tag called `<app-root></app-root>`. And when taking a look at the file _app.component.ts_, it has a component called `app-root`:
 ```typescript
 import { Component } from '@angular/core';
 
@@ -228,7 +228,7 @@ Replace the `templateUrl` section in the `@Component` decorator with just `templ
 To use multi-line strings, use backtics. For using styles, use either styleUrl or styles for inline, which take an array for css styles.  
 
 ### Different selector:
-The selectors don't just need to be an HTML tag. If you want to use the selector as an attribute, use selector as:
+The selectors don't just need to be an HTML tag. If you want to use the selector as an HTML attribute/property, use selector as:
 ```TypeScript
 @Component({
   selector: '[app-servers]',
@@ -245,7 +245,7 @@ The same goes for class:
   styleUrl: './servers.component.css'
 })
 ```
-For this selector to work, the HTML should look like: `<div class="app-servers"></div>`. This will work for all the selectors that have the attribute: `app-servers`.  
+For this selector to work, the HTML should look like: `<div class="app-servers"></div>`. This will work for all the selectors that have the HTML attribute/tags with property: `app-servers`.  
 
 ## Data-Binding:
 Databinding means the communication between the typescript code(i.e. the business logic) and the HTML template.  
@@ -269,7 +269,7 @@ This is called String Interpolation is because the statement given between the c
 The restriction to using this is that we cannot use multi-line expressions in between the curly braces.
 
 ### Property Binding:
-We use property binding to make make changes to some property dynamically. It is done using square brackets.
+We use property binding to make changes to some property dynamically. It is done using square brackets.
 For example:
 ```html
 <button type="button" name="button" class="btn btn-primary" [disabled]="allowNewServer">Add Server</button>
@@ -310,3 +310,42 @@ onCreateServer() {
   this.serverCreationStatus = 'Server was created.';
 }
 ```
+
+__NOTE:__ Until this point, a few things to remember what things to use when binding:  
+* {{ }} -> String Interpolation. Used to display information on the web page.
+* [] -> Property Binding. Used to bind an HTML tag/action to a property/variable of the same class.
+* () -> Event Binding. Used to tie an action to an event occured on the HTML page.
+* All the above three can only be bound to either inline single line code snippets or to the class level properties.
+### Passing and Using Data with Event Binding:
+This is done by using the keyword: `$event`. `$event` is a special reserved keyword which we can be used in the template during event binding.  
+For this, we can use the same example we used in the earlier section to learn this:  
+```HTML
+<label for="testing">Server</label>
+<input type="text" name="testing" id="testing" class="form-control" (input)="onUpdateServerName($event)">
+{{ serverName }}
+<button class="btn btn-primary" [disabled]="isDisable" (click)="onCreateServer()">Add Server</button>
+
+{{ serverCreationStatus }}
+```
+In this case here, what it does is, whenever we input something in the text field, an event is generated and the function `onUpdateServerName()` function is called. So, if we input anything from the keyboard, it will call as many times as there are changes made in the text field. And in the event object structure, there is a property called `event.target.value` which changes to what is in the input field.  
+The code behind this will be:
+```TypeScript
+  isDisable: boolean = true;
+  serverName: String = null;
+  serverCreationStatus: String = "No Server was created";
+
+  constructor() {
+      setTimeout(() => {
+          this.isDisable = false;
+      }, 5000);
+  }
+
+  onCreateServer(): void {
+      this.serverCreationStatus = "Server was created. Name: " + this.serverName;
+  }
+
+  onUpdateServerName(event: any) {
+      this.serverName = event.target.value;
+  }
+```
+So if we enter in the input field as _Test-Server_, the value of `this.serverName` will be the text that we entered in the text field. This is how the data flow works with event binding.

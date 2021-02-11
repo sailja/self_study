@@ -5,6 +5,22 @@ import { Component } from "@angular/core";
     templateUrl: './server.component.html'
 })
 export class ServerComponent {
-    serverId: number = 10;
-    serverStatus: string = 'offLine';
+    
+    isDisable: boolean = true;
+    serverName: String = null;
+    serverCreationStatus: String = "No Server was created";
+
+    constructor() {
+        setTimeout(() => {
+            this.isDisable = false;
+        }, 5000);
+    }
+
+    onCreateServer(): void {
+        this.serverCreationStatus = "Server was created. Name: " + this.serverName;
+    }
+
+    onUpdateServerName(event:any ) {
+        this.serverName = event.target.value;
+    }
 }
