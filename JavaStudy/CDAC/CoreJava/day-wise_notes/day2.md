@@ -1,6 +1,7 @@
 # Contents: 
 * [Rules for naming an identifier](#rules_for_naming_an_identifier)
 * [Conversion in Primitive Data Types](#conversion_in_primitive_data_types)
+* [JVM Data Areas](#jvm_data_areas)
 
 <hr>
 
@@ -27,7 +28,7 @@ short s = b;
 ```
 The above piece of code won't give an error, as byte can be automatically converted into short. But not the other way around.
 
-The whole cycle of automatic conversion is:
+The whole cycle of automatic conversion is:  
 ![image](../additional_resources/type_conversion.png)
 
 The Java Compiler has to follow certain rules when doing automatic conversions:  
@@ -94,3 +95,40 @@ __NOTE:__
     Java is not truely object oriented b'coz there are a few object-oriented priciples that it doesn't support.
     For ex:Multiple Inheritence,Operator Overloading,Not everything here is an object.
     Java also supports functional programming paradigm.
+
+# JVM Data Areas:
+<a name='jvm_data_areas'></a>
+
+For this, let's look at the JVM architecture again:
+![image](../additional_resources/JVM-architecture.png)
+
+When we run a java program, we start the JVM(using `java` command) that is a process on the Operating System. The operating system allocates some memory to the JVM and this memory will be divided into different parts for different purposes.  
+
+## Method Area: 
+* The 'Class Loader Subsystem' will load/store the class information into the method area.Thus, __method area is used to store class specific information__. 
+* Java 8 onwards the name of the method area is called __Metaspace__. Till Java 7 it was called __Permanent Generation Space(PermGen Space)__.  
+* The _PermGen Space_(mehtod area till java 7) was fixed in size and when we kept on adding classes to the program, it gave us Out of Memory errors.  
+* MetaSpace is allocated memory from the native memory of the computer and it is not on the Vitual Memory which has a fixed size. So theoritically, this won't go Out of Memory.
+* One Method Area per JVM- One method area will be shared accross multiple threads belonging to the same JVM isntance.
+
+## Object Heap:
+* In Java, there is no concept of Local Object. All the objects are created dynamically using 'new' keyword and thus the objects are stored in the Object Heap.
+* Object has a state and a behavior. State of an object are the non-static data members. And behavior of the object is the functions that the object can be performed upon. 
+* Object Heap will only save the state of the object. The behaviour of the object is stored in the mehtod area with the class information.
+* One Object Heap per JVM- One Object Heap will be shared accross multiple threads belonging to the same JVM instance.
+
+## Java Stacks:
+* One stack per thread.  
+![image](../additional_resources/java_stacks.png)  
+* Stack will hold method arguments, method local variables and the return types.
+* Each stack consists of different stack frames which are different function calls.
+* Whenever a new function is called, it's stack frame is created and in this stack frame, all method local data is stored.
+
+## PC Registers: 
+* This will store the address of the next line of code to execute.
+* This will be one per thread.
+
+## Java Native Stacks:
+* Java provides us with a Java Native Interface(JNI) using which we can call a C/C++/Assembly method from a java program. 
+* All method local runtime information of the native methods are stored in Native Method Stack.
+* One Per thread.
