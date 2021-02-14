@@ -1,5 +1,5 @@
 /**
- * Problem statement: Take a number as an input using scanner and test whether 
+ * Problem statement: Take a number as an input using scanner and test whether even or not.
  */
 import java.util.Scanner;
 public class TestEven {

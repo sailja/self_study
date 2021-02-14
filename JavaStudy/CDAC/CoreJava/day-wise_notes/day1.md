@@ -12,7 +12,7 @@
 
 <hr>
 
-## How Java Programs work:
+# How Java Programs work:
 <a name='how_java_programs_work'></a>
 
 For any java program to run these are the steps that it needs to follow:
@@ -24,7 +24,7 @@ For any java program to run these are the steps that it needs to follow:
 
 When we compile the source code, it produces an intermediatory byte code(`.class` file). This intermediatory byte code is not meant for any real platform, but this can only run on __JVM(Java Virtual Machine)__. The __JVM__ is a java runtime environment, which translates from platform independent byte code to platform specific native code. This is called interpretation(runtime translation).
 
-## Why Java?
+# Why Java?
 <a name='why_java'></a>
 
 When Starting Java, one thing to understand is- Why Java? What makes the Java Language this popular?
@@ -43,7 +43,7 @@ Steps to run a java program:
 * Run the command `javac Test.java`. This will output of a file with an extension `.class`. For our case, 'Test.class'.
 * After the `.class` file is generated, run the command `java Test` to run the program. The `.class` part should be removed.
 
-## JDK vs JRE vs JVM:
+# JDK vs JRE vs JVM:
 <a name='jdk_vs_jre_vs_jvm'></a>
 
 ![image](../additional_resources/jdk_vs_jre_vs_jvm.jpg)  
@@ -55,12 +55,12 @@ JRE can be further divided into two sections: _Java API Libraries_ and _JVM(Java
 
 Java API Libraries are the default provided libraries along with the java application which help/support in the development on applications. Under the lib directory, there is a jar file named 'rt.jar' which contains all the packages(bundled collection of functionally similar classes).
 
-And JVM(Java Virtual Machine) is the actual runtime where Java apps run. This consists of multiple sections which can be seen in the sectin below.
+And JVM(Java Virtual Machine) is the actual runtime where Java apps run. This consists of multiple sections which can be seen in the section below.
 
 
 __NOTE:__ When we write `import java.io.*;` in a java function, it does n't mean that all the classes in `java.io` package will be loaded in the program, as `java.io` has hundreds of classes, and that'll only slow down the execution of the program. It only loads the classes that are requried in the program. 
 
-## JVM Architecture:
+# JVM Architecture:
 <a name='jvm_architecture'></a>
 
 ![image](../additional_resources/JVM-architecture.png)
@@ -69,7 +69,7 @@ JVM has various sub components internally.
 1. Class loader sub system: JVM's class loader sub system performs 3 tasks
       * It loads .class file into memory.
       * It verifies byte code instructions.
-      * It allots memory required for the program.
+      * It allocates memory required for the program.
 
 2. Run time data area: This is the memory resource used by JVM and it is divided into 5 parts
       * Method area: Method area stores class code and method code. (metaspace in Java SE 8)
@@ -106,7 +106,7 @@ Static java compiler (javac) is a compiler that compiles human readable _.java_ 
 <p>JIT Compiler gathers statistics, finds the "hot" code, compiles it from JVM interpreted bytecode (that is stored in .class files) to a native code that is executed directly by Operating System and heavily optimizes it.  Smallest compilation unit is single method. Compilation and statistics gathering is done in parallel to program execution by special threads.During statistics gathering the compiler makes hypotheses about code function and as the time passes tries to prove or to disprove them. If the hypothesis is dis-proven the code is 
 deoptimized and recompiled again.</p>
 
-### What optimizations JIT does?
+## What optimizations JIT does?
 Let's look closely at more optimizations done by JIT:
 * _Inline methods_: instead of calling method on an instance of the object it copies the method to caller code. The hot methods should be located as close to the caller as possible to prevent any overhead. 
 * Eliminate locks if monitor is not reachable from other threads
@@ -116,14 +116,14 @@ Let's look closely at more optimizations done by JIT:
 * Drop memory write for non-volatile variables
 * Remove prechecking NullPointerException and IndexOutOfBoundsException 
     
-### How JIT compiler and JVM work side by side:
+## How JIT compiler and JVM work side by side:
 * When the Java VM invokes a Java method, it uses an invoker method as specified in the method block of the loaded class object. 
 * The Java VM has several invoker methods, for example, a different invoker is used if the method is synchronized or if it is a native method.The JIT compiler uses its own invoker. 
 * The JVM check the method access bit for value __ACC_MACHINE_COMPILED__ to notify the interpreter that the code for this method has already been compiled and stored in the loaded class. 
 * JIT compiler compiles the method block into native code for this method and stores that in the code block for that method. 
 * Once the code has been compiled the __ACC_MACHINE_COMPILED__ bit, which is used on the Sun platform(JVM), is set.
 
-## Writing the first Java Program:
+# Writing the first Java Program:
 <a name='writing_the_first_java_program'></a>
 
 ```java
@@ -154,7 +154,7 @@ __Some Points to Note:__
       4. __Public__ (Scope: visible everywhere)  
 * Method local variables cannot have any access specifiers, because as the method local variables should only be accessible in a single method, when we try to add access specifiers to that we're trying to alter the scope of that variable. We're trying to expand it's scope beyond that method. Thayt's why it's not allowed.  
 * The _static_ keyword in _main()_ method defination means that the _main()_ method can be called without creating an object/without instantiation.
-* _void_ is a keyword used for the return type of the function. _main()_ method returns nothing. This is different from __C/C++__. That's because when running _C/C++_ we're running the code directly on the OS, and it needs a return to know whether the exuction of the program was a success or not. But since Java Programs don't run directly on the platform/OS, rather than a VM, it doesn't need to return anything back to the OS.
+* _void_ is a keyword used for the return type of the function. _main()_ method returns nothing. This is different from __C/C++__. That's because when running _C/C++_ we're running the code directly on the OS, and it needs a return to know whether the exuction of the program was a success or not. But since Java Programs don't run directly on the platform/OS, rather it is running on a VM, it doesn't need to return anything back to the OS.
 * In the signature of the _main()_ method, it needs a string array as an argument to capture the command line arguments. In Java String is a class in _java.lang_ package, rather than an array of characters like C/C++.
 * The first element of the string argument array is the element that is passes. It doesn't represent the name of the program, like C/C++.
 
@@ -166,7 +166,7 @@ __How `System.out.println()` statement works:__
 * Using this data member of the system class, we can call the `print()/println()` method based .
 And that's how the print function works.
 
-## How to run Java programs:
+# How to run Java programs:
 <a name='how_to_run_java_programs'></a>
 
 Before compilation of java source code, let's look at the folder structure:  
@@ -175,12 +175,12 @@ _bin_: All the compiled code(intermeditiary byte code/`.class` files) should be 
 
 Thus, to compile the source code, use this command:
 ```bash
-javac -d ../bin Hello.java
+$javac -d ../bin Hello.java
 ```
 This means that after the compilation, all the `.class` files will be generated in the bin directory.
-To run this program, you have to call the name of the class:
+To run this program, you have to call the name of the class(from the bin directory):
 ```bash
-java Hello
+$java Hello
 ```
 ```output
 Hello World
@@ -192,7 +192,7 @@ Error: Main method not found in class Hello, please define the main method as:
    public static void main(String[] args)
 or a JavaFX application class must extend javafx.application.Application
 ```
-And the reason being that inorder to run the code, JVM looks for a special function with a signature: `public static void main(Sting[] args)` in order to run the program.  
+And the reason being that inorder to run the program, JVM looks for a special function with a signature: `public static void main(Sting[] args)`.  
 The same happens for any change in the signature of the main function, eg. `public static void main(String args)`, because the argument list doesn't have an array of Strings, but it has a single String parameter.
 
 ## Some important notes about java program source files:
@@ -215,7 +215,7 @@ class B{
       // Empty class
 }
 ```
-* When we compile the above source file, it'll produce three `.class` files: Hello.java, A.java, B.java. And when we run these, other than Hello, the others give an error, as there is no main method in them.
+* When we compile the above source file, it'll produce three `.class` files: Hello.class, A.class, B.class. And when we run these, other than Hello, the others give an error, as there is no main method in them.
 * When writing a class, if we give the class a public specifier, we'll have to name the file the same as that of the public class. If we don't then we see this error:
 ```console
 Hello.java:1: error: class Hello2 is public, should be declared in a file named Hello2.java
@@ -255,30 +255,30 @@ Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 0 out
 ```
 This gives an error, because if we don't pass anything when running the program, the args is an empty String array with length as 0. So if we try to access the 1st element of the array, which is not present, it gives `ArrayIndexOutOfBoundsException`.  
 The reason it says Exception in thread "main" is because JVM creates a thread which invokes the main method, and thus it is called "main" thread.  
-And in the above program if we pass anything other than an integer umber as an argument, it'll give an error/Runtime Exception called `java.lang.NumberFormatException`. So if you pass 4 and e, ie, a string which contains a non-parsable integer, it doesn't give the output as 4 + ASCII value of 'e'. 
+And in the above program if we pass anything other than an integer number as an argument, it'll give an error/Runtime Exception called `java.lang.NumberFormatException`. So if you pass 4 and e, ie, a string which contains a non-parsable integer, it doesn't give the output as 4 + ASCII value of 'e'. 
 
-## Java Data-Types:
+# Java Data-Types:
 <a name='java_data_types'></a>
 
 The summary of the java data-types has been described in the image below:
 ![image](../additional_resources/java_data_types.jpg)
 
-## Accepting Input using Scanner Class:
+# Accepting Input using Scanner Class:
 <a name='accepting_input_using_scanner'></a>
 
-### Why Scanner?
+## Why Scanner?
 * Scanner Class is used to take input other than command line arguments. 
 * The other benefit of using Scanner Class is that we don't have to parse the entered element every time we want the data to be in a type other than String.
 * With Scanner Class, we can take inputs while the program is running. It doesn't always have to be at the beginning when running the program.
 
-### What is Scanner?
+## What is Scanner?
 * Part of `java.util` package.
 * Scanner class can be called as a parser which has an inherent Buffer build into it.
 * Scanner can be attached to either a standard input like keyboard, or a text file and it'll work the same way for both of them.
 * Scanner can also be attached to a socket to accept/read strings directly from the sockets.
 * The default delimitter for a token in the Scanner Buffer is space.
 
-### Writing the first program using Scanner to take input:
+## Writing the first program using Scanner to take input:
 ```java
 /**
  * Problem statement: Take a number as an input using scanner and test whether 

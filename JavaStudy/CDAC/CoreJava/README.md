@@ -4,7 +4,7 @@
       * How Java Programs work
       * Why Java?
       * JDK vs JRE vs JVM
-      * [JVM Architecture](./day-wise_notes/day1.md/jvm_architecture)
+      * JVM Architecture
       * More about JIT Compiler
       * Writing the first Java Program
       * How to run Java Program
