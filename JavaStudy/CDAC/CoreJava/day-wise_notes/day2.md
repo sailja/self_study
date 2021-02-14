@@ -1,6 +1,7 @@
 # Contents: 
 * [Rules for naming an identifier](#rules_for_naming_an_identifier)
-# Day-2:
+
+<hr>
 
 ## Rules for naming an identifier:
 <a name='rules_for_naming_an_identifier'></a>

@@ -12,8 +12,6 @@
 
 <hr>
 
-# Day-1
-
 ## How Java Programs work:
 <a name='how_java_programs_work'></a>
 
