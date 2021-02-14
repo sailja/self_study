@@ -15,6 +15,7 @@
 2. [Day-2](./day-wise_notes/day2.md):
 
       * Rules for naming an identifier
+      * Conversion in Primitive Data Types
 
 
 
