@@ -3,7 +3,7 @@ Problem Statement: Write a tightly encapsulated class to perform actions on a Bo
 */
 public class Box {
 
-    double length, breadth, height;
+    private double length, breadth, height;
 
     Box(double length, double breadth, double height) {
         this.length = length;
@@ -12,10 +12,10 @@ public class Box {
     }
 
     public void displayDetails() {
-        System.out.println("The details are:\nLength: " + this.length + "\nBreadth: " + this.breadth + "\nHeight: " + this.height);
+        System.out.println("The details are:\nLength: " + length + "\nBreadth: " + breadth + "\nHeight: " + height);
     }
 
     public double calcVolume() {
-        return this.length * this.breadth * this.height;
+        return length * breadth * height;
     }
 }

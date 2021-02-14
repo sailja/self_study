@@ -191,7 +191,8 @@ eg : Create tightly encapsulated Box class , supply public accessors.
 
 __NOTE:__ Abstraction -- achieved by supplying an interface to the Client (customer) .Highlighting only WHAT is to be done & not highlighting HOW it's internally implemented.
 
-Implementation example:
-[Box.java](../code_files/day2/classwork/src/Box.java)
-[Test.java](../code_files/day2/classwork/src/Tester.java)
-__NOTE:__ Looking at the Box.java file, the 
+Implementation example:  
+[Box.java](../code_files/day2/classwork/src/Box.java)  
+[TestBox.java](../code_files/day2/classwork/src/Tester.java)  
+
+__NOTE:__ Looking at the Box.java file, when we use the same variable names for the local scope in the constructor/method and the instance variable. That is called shadowing. That's the reason, we have to use `this` keyword when working with instnace variables in the same scope with local variables with same variable names.
