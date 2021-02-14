@@ -194,3 +194,4 @@ __NOTE:__ Abstraction -- achieved by supplying an interface to the Client (custo
 Implementation example:
 [Box.java](../code_files/day2/classwork/src/Box.java)
 [Test.java](../code_files/day2/classwork/src/Tester.java)
+__NOTE:__ Looking at the Box.java file, the 
