@@ -2,6 +2,7 @@
 * [Rules for naming an identifier](#rules_for_naming_an_identifier)
 * [Conversion in Primitive Data Types](#conversion_in_primitive_data_types)
 * [JVM Data Areas](#jvm_data_areas)
+* [Object Oriented Principles](#object_oriented_principles)
 
 <hr>
 
@@ -132,3 +133,64 @@ When we run a java program, we start the JVM(using `java` command) that is a pro
 * Java provides us with a Java Native Interface(JNI) using which we can call a C/C++/Assembly method from a java program. 
 * All method local runtime information of the native methods are stored in Native Method Stack.
 * One Per thread.
+
+# Object Oriented Principles:
+<a name='object_oriented_principles'></a>
+
+Classes and Objects are basic concepts of Object Oriented Programming which revolve around the real life entities.
+
+## Class:
+A class is a user defined blueprint or prototype from which objects are created. It represents the set of properties or methods that are common to all objects of one type. 
+
+Class declaration includes:  
+1. Access specifiers  : A class can be public or has default access 
+2. Class name: The name should begin with a capital  letter & then follow camel case convention
+3. Superclass(if any): The name of the class’s parent (superclass), if any, preceded by the keyword 'extends'.(Implicit super class of all java classes is java.lang.Object)
+4. Interfaces(if any): A comma-separated list of interfaces implemented by the class, if  any, preceded by the keyword 'implements'. A class can implement more than one interface.
+5. Body: The class body surrounded by braces, { }.
+6. Constructors: Constructors are used for initializing new objects. Constructor is a special method having same name as the class name with no explicit return type. Implicity it returns the type of the class itself. It can may be parameterized or parameter less.
+7. Fields are variables that provides the state of the class and its objects. Example: name of the Employee class
+8. Methods are used to implement the behavior of the class and its objects.
+
+eg : Student,Employee,Flight,PurchaseOrder, Shape ,BankAccount
+
+__NOTE:__
+* Parameterized constructor is used to initialize state of the object.
+* If a class does not explicitly declare any constructor , the Java compiler automatically provides a no-argument constructor,called the default constructor. 
+* This default constructor implicitely calls the super class's  no-argument constructor.
+
+## Object:
+It is a basic unit of Object Oriented Programming and represents the real life entities.  A typical Java program creates many objects, which  interact by invoking methods.
+
+An object consists of :
+1. State : It is represented by attributes of an object. (properties of an object)
+2. Behavior : It is represented by methods of an object (actions upon data)
+3. Identity : It gives a unique identity to an object and enables one object to interact with other objects. eg : Emp id / Student PRN / Invoice No 
+
+### Creating an object:
+* The 'new' operator instantiates a class by allocating memory for a new object and returning a reference to that memory.   
+* It returns the class type reference to the object.  
+* The 'new' operator also invokes the class constructor.
+* The values set by default to the instance variables are the default values. Like, 0 for int, and 0.0 for double. null for reference type variable.
+
+## Encapsulation:
+* Encapsulation is defined as the wrapping up of data & code under a single unit. --consists of Data hiding & Abstraction.  
+* It is the mechanism that binds together code and the data it manipulates.  
+* It is a protective shield that prevents the data from being accessed by the code outside this shield.  
+* The variables or data of a class is hidden from any other class and can be accessed only through any member function/method of own class in which they are declared.  
+* As in encapsulation, the data in a class is hidden from other classes, so it is also known as data-hiding.  
+* Tight Encapsulation can be achieved by: Declaring all the variables in the class as private and writing public methods as its accessors.
+
+eg : Create tightly encapsulated Box class , supply public accessors. 
+
+### Advantages of Encapsulation:
+1. Data Hiding (security)  
+2. Increased Flexibility: We can make the variables of the class as read-only or write only or r/w.  
+3. Reusability: Encapsulation also improves the re-usability and easy to change with new requirements.  
+4. Testing code is easy  
+
+__NOTE:__ Abstraction -- achieved by supplying an interface to the Client (customer) .Highlighting only WHAT is to be done & not highlighting HOW it's internally implemented.
+
+Implementation example:
+[Box.java](../code_files/day2/classwork/src/Box.java)
+[Test.java](../code_files/day2/classwork/src/Tester.java)
