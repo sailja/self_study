@@ -7,14 +7,10 @@ import java.util.InputMismatchException;
 public class TestBox {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double length, breadth, height;
         System.out.println("Enter the three dimesions of the box:");
         
         try {
-            length = sc.nextDouble();
-            breadth = sc.nextDouble();
-            height = sc.nextDouble();
-            Box b = new Box(length, breadth, height);
+            Box b = new Box(sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
             b.displayDetails();
             System.out.println("The volume of the box is: " + b.calcVolume());
 

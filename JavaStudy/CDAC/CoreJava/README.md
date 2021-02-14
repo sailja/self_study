@@ -18,6 +18,9 @@
       * Conversion in Primitive Data Types
       * JVM Data Areas
       * Object Oriented Principles
+      * Regarding Garbage Collection
+      * Pointers vs Java References
+      * Different types of Variables:
 
 
 

@@ -3,6 +3,9 @@
 * [Conversion in Primitive Data Types](#conversion_in_primitive_data_types)
 * [JVM Data Areas](#jvm_data_areas)
 * [Object Oriented Principles](#object_oriented_principles)
+* [Regarding Garbage Collection](#regerding_garbage_collection)
+* [Pointers vs Java References](#pointers_vs_java_references)
+* [Different types of Variables](#different_types_of_variables)
 
 <hr>
 
@@ -193,6 +196,46 @@ __NOTE:__ Abstraction -- achieved by supplying an interface to the Client (custo
 
 Implementation example:  
 [Box.java](../code_files/day2/classwork/src/Box.java)  
-[TestBox.java](../code_files/day2/classwork/src/Tester.java)  
+[TestBox.java](../code_files/day2/classwork/src/TestBox.java)  
 
 __NOTE:__ Looking at the Box.java file, when we use the same variable names for the local scope in the constructor/method and the instance variable. That is called shadowing. That's the reason, we have to use `this` keyword when working with instnace variables in the same scope with local variables with same variable names.
+
+__NOTE:__ The different types of object relationships are:  
+1. 'is a': Inheriting the properties of a class and extending it. Example: Mango & Fruit- Mango is a fruit.
+2. 'has a': Containment. One object contains a reference to another object. Example: The user object may have another object reference to address object.
+3. 'uses a': In the above program, the TestBox class uses a Box class. It is dependent on the Box class. This is different from the 'has a' relationship because 'has a' means that the reference object is a part of the object in question. But when we have 'uses a', it means it is just dependent on a different variable.
+
+## Memory Allocation Diagram:
+![image](../additional_resources/object_memory_allocation.png)
+
+From the above picture, if we execute a statement as `b = null`, the link to the first object is cut and thus it'll have no references pointing to it. That object will be marked for Garbage Collection. Garbage => Unreachable object in java.
+
+__NOTE:__ One trigger for class loading is instantiating a class. Class loading happens only once per jvm. If an object of the same class is needed to be created, since the class is already loaded, JVM will use the already loaded class.
+
+# Regarding Garbage Collection:
+<a name='regerding_garbage_collection'></a>
+
+* Garbage in Java => un-referencable object.
+* Automatic Gargabe Collection --- to avoid Memory leaks/holes.
+* JVM creates 2 thrds --- main thrd(to exec main() sequentially) -- foreground thrd G.C --- daemon thrd ---background thrd --- JVM activates it periodically(only if required)  --- GC releases the memory occupied by un-referenced objects allocated on the heap(the obj whose no. of ref=0) 
+* Request for GC => API of System class: `public static void gc()`. So to call it: `System.gc();` Internally it will call : `Runtime.getRuntime().gc();`.
+* Releasing of  non- Java resources.(eg - closing of DB connection, closing file handles,closing socket connections) is NOT done automatically by GC.
+* Object class API `protected void finalize() throws Throwable` is automatically called by the garbage collector on an object before garbage collection of the object takes place.
+## Triggers for marking the object for GC(candidate for GC):
+
+1. Nullifying all valid refs.
+2. re-assigning the reference to another object
+3. Object created within a method & its ref NOT returned to the caller.
+
+# Pointers vs Java References:
+<a name='pointers_vs_java_references'></a>
+
+Similarity -- Pointer & reference --hold an address to the object created on heap.
+Difference -- To add robustness to the language pointer arithmatic is not allowed in java.
+
+reference --- holds internal representation of address --
+
+# Different types of Variables:
+<a name='different_types_of_variables'></a>
+
+![image](../additional_resources/java_variables.png)
