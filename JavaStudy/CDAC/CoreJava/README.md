@@ -20,7 +20,8 @@
       * Object Oriented Principles
       * Regarding Garbage Collection
       * Pointers vs Java References
-      * Different types of Variables:
+      * Different types of Variables
+      * Packages
 
 
 

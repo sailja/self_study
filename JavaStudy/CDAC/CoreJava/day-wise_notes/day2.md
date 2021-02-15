@@ -6,6 +6,7 @@
 * [Regarding Garbage Collection](#regerding_garbage_collection)
 * [Pointers vs Java References](#pointers_vs_java_references)
 * [Different types of Variables](#different_types_of_variables)
+* [Packages](#packages)
 
 <hr>
 
@@ -233,9 +234,61 @@ __NOTE:__ One trigger for class loading is instantiating a class. Class loading 
 Similarity -- Pointer & reference --hold an address to the object created on heap.
 Difference -- To add robustness to the language pointer arithmatic is not allowed in java.
 
-reference --- holds internal representation of address --
+reference --- holds internal representation of address
+
+__NOTE:__ Everything in Java is Pass by Value as the data stored in a variable is the reference which is considered as a value. So, when we pass something, it passes the references but since every object is assigned by reference in java, it is called pass by value.
 
 # Different types of Variables:
 <a name='different_types_of_variables'></a>
 
 ![image](../additional_resources/java_variables.png)
+
+# Packages:
+<a name='packages'></a>
+
+A package is a collection of functionally similar classes & interfaces.
+
+## Creating User-defined packages:
+
+__Need:__ 
+1. To group functionally similar classes together.
+2. Avoids name space collision
+3. Finer control over access specifiers.
+
+## About Packages:
+1. Creation : package stmt has to be placed as the 1st stmt in Java source.  
+    eg : package p1; => the classes will be part of package p1.  
+
+2. Package names are mapped to folder names.  
+    eg : package p1; class A{....}  
+    A.class must exist in folder p1.  
+    eg : package p1.p2.p3; class A{....}  
+    A.class must exist in folder p1/p2/p3
+
+3.  For simplicity create folder p1 under ./src & compile from ./src
+    From ./src
+    ```bash
+    $javac -d ../bin p1/A.java
+    ```
+__NOTE:__ 
+    1. javac will auto. create the sub-folder /p1 under the /bin folder & place A.class within /p1
+    2. Its not mandatory to create java sources(.java) under package named folder. BUT its mandatory to store packged compiled classes(.class) under package named folders
+    3. If no package is given, java compiler will assign it a default package whose name is anonymous.
+
+4. Running packaged classes:
+    package: /bin/com/cdac/tester/TestEmp.class
+    Command(from /bin)
+    ```bash
+    $java com.cdac.tester.TestEmp
+    ```
+
+5.To run the pkged classes from any folder : you must set Java specific  env var. : classpath
+    set classpath=g:\dac1\day2\bin;
+    classpath= Java specific env .var
+    Used mainly by JVM's classloader : to locate & load the classes.
+    Classloader will try to locate the classes from current folder, if not found --- will refer to classpath entries : to resolve & load Java classes.
+    What should be value of classpath ---Must be set to top of pakged hierarchy(i.e .class eg : bin) 
+    set classpath=G:\dac\dac1\day2\bin;(cmd line invocation)
+    OR better still set it from environment variables.
+
+![image](../additional_resources/package_info.png)
