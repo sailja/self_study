@@ -16,6 +16,7 @@
       * Break
       * Continue
       * Arrays
+      
 1. [Day-1](./day-wise_notes/day1.md):
 
       * How Java Programs work
@@ -42,5 +43,5 @@
 
 3. [Day-3](./day-wise_notes/day3.md):
       
-      *
+      * Java Arrays
 
