@@ -1,4 +1,21 @@
 # Contents:
+0. [Day-0](./day-wise_notes/day0.md):
+      * Declaration
+      * Assignment
+      * Relational Operators
+      * Statements and Blocks
+      * Flow of Control
+      * If – The Conditional Statement
+      * If… else
+      * Nested if … else
+      * else if
+      * The switch Statement
+      * For Loops
+      * While Loops
+      * Do {...} While Loops
+      * Break
+      * Continue
+      * Arrays
 1. [Day-1](./day-wise_notes/day1.md):
 
       * How Java Programs work
@@ -23,5 +40,7 @@
       * Different types of Variables
       * Packages
 
-
+3. [Day-3](./day-wise_notes/day3.md):
+      
+      *
 

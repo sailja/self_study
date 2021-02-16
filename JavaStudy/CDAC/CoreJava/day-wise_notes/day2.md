@@ -201,6 +201,22 @@ Implementation example:
 
 __NOTE:__ Looking at the Box.java file, when we use the same variable names for the local scope in the constructor/method and the instance variable. That is called shadowing. That's the reason, we have to use `this` keyword when working with instnace variables in the same scope with local variables with same variable names.
 
+__NOTE:__ Another use of `this` keyword is to run constructor of the same class. Example:
+```java
+class Box {
+    private double length, breadth, height;
+    Box(double side) {
+        this(side, side, side);
+    }
+    Box(double length, double breadth, double height) {
+        this.length = length;
+        this.breadth = breadth;
+        this.height = height;
+    }
+}
+```
+Thus, `this` keyword refers to everything of the current class.
+
 __NOTE:__ The different types of object relationships are:  
 1. 'is a': Inheriting the properties of a class and extending it. Example: Mango & Fruit- Mango is a fruit.
 2. 'has a': Containment. One object contains a reference to another object. Example: The user object may have another object reference to address object.
@@ -234,7 +250,7 @@ __NOTE:__ One trigger for class loading is instantiating a class. Class loading 
 Similarity -- Pointer & reference --hold an address to the object created on heap.
 Difference -- To add robustness to the language pointer arithmatic is not allowed in java.
 
-reference --- holds internal representation of address
+reference --- holds internal representation of address. The actual value of the address can change and the object can be relocated to another place after garbage collection to avoid memory holes. This is the reason java does n't use actual pointers.
 
 __NOTE:__ Everything in Java is Pass by Value as the data stored in a variable is the reference which is considered as a value. So, when we pass something, it passes the references but since every object is assigned by reference in java, it is called pass by value.
 
@@ -282,7 +298,7 @@ __NOTE:__
     $java com.cdac.tester.TestEmp
     ```
 
-5.To run the pkged classes from any folder : you must set Java specific  env var. : classpath
+5. [Optional] To run the pkged classes from any folder : you must set Java specific  env var. : classpath
     set classpath=g:\dac1\day2\bin;
     classpath= Java specific env .var
     Used mainly by JVM's classloader : to locate & load the classes.
