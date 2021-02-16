@@ -44,4 +44,5 @@
 3. [Day-3](./day-wise_notes/day3.md):
       
       * Java Arrays
-
+      * Access Specifiers
+      * Inheritence

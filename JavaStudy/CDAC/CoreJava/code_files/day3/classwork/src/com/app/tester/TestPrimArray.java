@@ -1,3 +1,6 @@
+/**
+Problem Statement: Tester Program to learn more about how integer arrays work.
+ */
 package com.app.tester;
 import java.util.Scanner;
 import java.util.InputMismatchException;
