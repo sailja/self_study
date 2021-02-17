@@ -148,7 +148,7 @@ __NOTE:__
 ## Using toString() method:
 1. The overloaded print function of the PrintStream class is called: `public void print(Object obj)/public void println(Object obj)`.  
 2. Generates the String representation of the Object using the method `String.valueOf(Object)` and is translated into bytes according to the platform's default character encoding, and these bytes are written in exactly the manner of the `write(int)` method.
-3. The method `String.valueOf(Object)` returns the string representation of the Object argument - `null` if the value of the reference is null , otherwise, the value of `obj.toString()` is returned.
+3. The method `String.valueOf(Object)` returns the string representation of the Object argument - `null` if the value of the reference is null , otherwise, the value of `obj.toString()` is returned. This is the reason, if we try to print/call implicit toString() function on a reference which is null, it does n't give a NullPointerException. But rather it prints out 'null'.   
 4. Default return type of  `toString()`:
     Fully Qualified Class name @ hashcode  
     hashcode= internal representation of adr.  
