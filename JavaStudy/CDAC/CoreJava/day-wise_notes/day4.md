@@ -192,7 +192,7 @@ if (e instanceof Emp)  //rets false.
 - [Worker.java](../code_files/day4/classwork/src/com/app/core/Worker.java) extending [Employee](../code_files/day4/classwork/src/com/app/core/Employee.java) Class  
 
 ### Tester class of these core classes:
-[Tester.java](../code_files/day4/classwork/src/app/tester/Tester.java)
+[Tester.java](../code_files/day4/classwork/src/com/app/tester/Tester.java)
 
 __NOTE:__ API of `java.util.Arrays` class `public static String deepToString(Object[] a)`. __INPUT:__ A - the array whose string representation to return. __RETURN:__ a string representation of A.
 
