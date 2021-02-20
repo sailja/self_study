@@ -140,6 +140,19 @@ __NOTE:__
 * The keyword `this` refers to the current class, and the keyword `super` refers to the immediate super class.  
 * Unless and until the super class is not loaded into the memory, an object cannot be created.  
 
+__NOTE:__  
+Uses of `super` keyword:  
+1. To access super class's visible members  
+2. To invoke immediate super class's matching constructor --- accessible only from sub class constructor.(super(...))
+3. When using the super constructor, it should be the first line of the method, or this will give a compiler error.
+
+__NOTE:__
+Regarding this & super:  
+1. Only a constr can use this() or super().  
+2. Has to be 1st statement in the constr.  
+3. Any constructor can never have both ie. this() & super().  
+4. super & this (w/o brackets) are used to access (visible) members of super class or the same class.  
+
 ## Inheritance Example:
 - Super Class: [Person.java](../code_files/day3/classwork/src/com/app/core/Person.java)  
 - Student Class: [Student.java](../code_files/day3/classwork/src/com/app/core/Student.java)  

@@ -46,3 +46,8 @@
       * Java Arrays
       * Access Specifiers
       * Inheritence
+
+4. [Day-4](./day-wise_notes/day4.md):
+
+      * Memory Picture of Student Object
+      * Polymorphism
