@@ -199,6 +199,7 @@ __NOTE:__ API of `java.util.Arrays` class `public static String deepToString(Obj
 ## Use of 'abstract' Keyword:
 * `abstract` keyword is used in java to let the inheriting classes know that the method defined as abstract has to be overridden.
 * `abstract` : keyword in Java  
+* This concept is directly linked to Abstraction. If you want to hide the actual implementaion details to the actual sub-types, but on the other hand you want the same declaration to be followed by the actual sub-classes.
 * abstract methods ---methods only with declaration & no definition  
     ex: `public abstract double calNetsalry();`  
 
