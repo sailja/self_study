@@ -111,7 +111,10 @@ Example:
 A ref=new B(); 
 ref.show()  // ---> this will invoke the sub-class: overriding form of the show() method
 ```
-__NOTE:__ Java Compiler always goes by the type of reference to deduce any syntactical errors. JVM always goes by the type of the object it is performing operation on, to deceide which class's method to be called. This is called Runtime Polymorphism. In java, it is called as Dynamic Method Dispatch.
+__NOTE:__ Java Compiler always goes by the type of reference to deduce any syntactical errors. JVM always goes by the type of the object it is performing operation on, to deceide which class's method to be called. This is called Runtime Polymorphism. In java, it is called as Dynamic Method Dispatch.  
+
+__Special note on  protected:__   
+Protected members acts as default scope within the same package. BUT outside pkg -- a sub-class can access it through inheritance(i.e just inherits it directly) & CANT be accessed by creating super class instance.  
 
 ## Overloading vs Overriding:
 ![image](../additional_resources/overloading_vs_overriding.png)
@@ -234,6 +237,87 @@ __Usage:__
     final Emp e=new Mgr(.......);
     e=new Worker(.....);    //compiler err
     ```
+## Usage of 'static' keyword:
+`static` is a keyword in java.  
+Usages:  
+1. static data members:  
+    Memory allocated only once @ class loading time. Not saved on object heap, but in special memory area- meta space. Metaspace is shared across all objects of the same class.  
+    Initialized to their default values(eg, boolean- false, ref- null)  
+    How to refer ? className.memberName  
 
-__Special note on  protected:__   
-Protected members acts as default scope within the same package. BUT outside pkg -- a sub-class can access it through inheritance(i.e just inherits it directly) & CANT be accessed by creating super class instance.  
+    Java doesn't (unlike c++) support local static variables.
+    eg :
+    ```java
+    class Test{
+        void testMe()
+        {
+            static int i;//javac err
+        }
+    }
+
+    public static int idCounter;
+    ```
+
+2. static methods:  
+    Can be accessed w/o instantiation. (ClassName.memberName(....))  
+    Can't access 'this' or 'super' from within static method.  
+
+    __Rules__:  
+    1. Can static methods access other static members directly(w/o inst) -- YES  
+    2. Can static methods access other non-static members directly(w/o inst) -- NO  
+    3. Can non-static methods access other static members directly(w/o inst) -- YES  
+    eg : In Test class  
+    `void test1() {test2();}`  
+    `static void test2(){....}`    
+    4. Can they access this or super ? --NO  
+
+
+3. import static:  
+    Can directly use all static members from the specified class. eg :
+    ```java
+    import static java.lang.System.*;
+    main(...)
+    {
+        out.println(.....);
+    }
+    ```
+
+4. static initializer blocks:  
+    syntax --
+    ```java
+    static {
+        // block gets called only once @ class loading time
+        // usage -- to init all static data members 
+        //& can add functionality -which HAS to be called precisely once.
+        // Use case : singleton pattern , J2EE for loading hibernate frmwork.
+    }
+    ```
+    They appear within class definition & can access only static members directly.(w/o inst)  
+    A class can have multiple static init blocks(legal BUT not recommended.)  
+
+    Regarding non-static initilizer blocks(Instance initilaizer block). Syntax:  
+    ```java
+    {
+        //will be called per instantiation --- before matching constructor
+        //Better alternative --- parameterized constructor.
+    }
+    ```
+
+5. static nested classes:  
+    ```java
+    class Outer {
+        // static & non-static members
+        static class Nested
+        {
+            //can access ONLY static members of the outer class DIRECTLY(w/o inst)
+        }
+    }
+    ```
+
+__NOTE:__   
+* Any static methods cannot be overriden as they are not associated with any object, and have only a single instance per class. The same is the reason why we can't use `this`/`super` keywords in static methods.  
+* One static method can directly call another static method without any instantiation. A static method can also access the static data members of the class, but not the instnace members without any instantiation.  
+* Non static methods can call the static data members/methods directly.  
+
+## Information on all the variables:
+![image](../additional_resources/java_variables.png)
