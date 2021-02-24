@@ -51,3 +51,7 @@
 
       * Memory Picture of Student Object
       * Polymorphism
+
+5. [Day-5](./day-wise_notes/day5.md):
+
+      * Interfaces
