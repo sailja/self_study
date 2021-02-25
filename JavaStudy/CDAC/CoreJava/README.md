@@ -57,3 +57,7 @@
       * Interfaces
       * Overriding 'equals()' method
       * Abstract Classes vs Interfaces
+
+6. [Day-6](./day-wise_notes/day6.md):
+
+      * Exception Handling

@@ -288,5 +288,6 @@ void draw();
 }
 ```
 Simply, abstract class achieves partial abstraction (0 to 100%) whereas interface achieves fully abstraction(100%).  
+
 __NOTE:__ In order for a class to implement an interface, it must implement all its declared methods. However, a class may not implement all declared methods of an abstract class. Though, in this case, the sub-class must also be declared
 as abstract. Abstract classes can implement interfaces without even providing the implementation of interface methods.  
