@@ -55,3 +55,5 @@
 5. [Day-5](./day-wise_notes/day5.md):
 
       * Interfaces
+      * Overriding 'equals()' method
+      * Abstract Classes vs Interfaces

@@ -1,5 +1,7 @@
 # Contents:
 * [Interfaces](#interfaces)
+* [Overriding 'equals()' method](#overriding_equals_method)
+* [Abstract Classes vs Interfaces](#abstract_classes_vs_interfaces)
 
 # Interfaces in Java:
 <a name='interfaces'></a>
@@ -209,3 +211,82 @@ public class C implements B1{
 	}
 }
 ```
+## Marker or tagged interface:
+An interface that have no member is known as marker or tagged interface. For example: Serializable, Cloneable, Remote etc. They are used to provide some essential information to the JVM(Run time marker)  so that JVM may perform some useful operation.  
+```java
+//How Serializable interface is written?  
+public interface Serializable{  
+}  
+```
+## Nested Interface in Java:
+Note: An interface can have another interface i.e. known as nested interface. 
+
+```java
+interface printable{  
+ void print();  
+ interface MessagePrintable{  
+   void msg();  
+ }  
+}  
+```
+# Overriding 'equals()' method:
+<a name='overriding_equals_method'></a>
+
+`equals()` method is another important API from the Object class that needs to be overriden.  
+The need for that is that when comparing two objects for equality, we want the objects to the be compared on the basis of the parameters we define as by default, what this'll do is, this will compare hashcode of the two objects, and even though the two objects' contents are same, it'll show them as not equal.  
+Here `@Override` annotation has to be given or else the compiler will think this is an overloaded method since the signature is different compared to the defination given in the class defination and the compiler doesn't implement co-variance directly, and matches more to the `equals()` method of `java.lang.Object`.  
+__Important meaning:__ Returns true in case of reference equality. Syntax:
+```java
+class Employee {
+    //... Rest of the employee class defination
+
+    /** Compare two Employees based on their IDs and Employee IDs
+    ID: int
+    empID: String
+    */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee e = (Employee)o;
+        return id == e.id && empID.equals(e.empID);
+    }
+}
+```
+
+## Use case of this:
+Modify the Event Organiser class(done in day4 assignment) to check whenever a person registers, is this a duplicate entry, or a new one. And give the message appropriate to that. The equality comparision should be done on first name and last name.  
+The code implementation for that is:  
+__Core Classes:__  
+- [Person.java](../code_files/day5/assignment/src/com/cdac/core/Person.java)  
+- [Faculty.java](../code_files/day5/assignment/src/com/cdac/core/Faculty.java) extending Person class from [Person.java](../code_files/day5/assignment/src/com/cdac/core/Person.java)  
+- [Student.java](../code_files/day5/assignment/src/com/cdac/core/Student.java) extending Person class from [Person.java](../code_files/day5/assignment/src/com/cdac/core/Person.java)  
+
+__EventOrganizer Class:__  
+- [EventOrganizer.java](../code_files/day5/assignment/src/com/cdac/tester/EventOrganizer.java)  
+
+# Abstract Classes vs Interfaces:
+<a name='abstract_classes_vs_interfaces'></a>
+
+Abstract class and interface both are used to achieve abstraction where we can declare the abstract methods.  
+Abstract class and interface both can't be instantiated.  
+But there are many differences between abstract class and interface:  
+
+1. Abstract class can have abstract and non-abstract methods.	Interface can have only abstract methods.  
+2. Abstract class doesn't support multiple inheritance.	Interface supports multiple inheritance.  
+3. Abstract class can have final, non-final, static and non-static variables.	Interface has only public,static and final variables.  
+4. Abstract class can have static methods, main method and constructor.	Interface can't have static methods, main method or constructor.  
+5. Abstract class can provide the implementation of interface.	Interface can't provide the implementation of abstract class.  
+6. The abstract keyword is used to declare abstract class.The interface keyword is used to declare interface.  
+7. Example:
+```java
+public abstract class Shape{
+public abstract void draw();
+}	Example:
+public interface Drawable{
+void draw();
+}
+```
+Simply, abstract class achieves partial abstraction (0 to 100%) whereas interface achieves fully abstraction(100%).  
+__NOTE:__ In order for a class to implement an interface, it must implement all its declared methods. However, a class may not implement all declared methods of an abstract class. Though, in this case, the sub-class must also be declared
+as abstract. Abstract classes can implement interfaces without even providing the implementation of interface methods.  
