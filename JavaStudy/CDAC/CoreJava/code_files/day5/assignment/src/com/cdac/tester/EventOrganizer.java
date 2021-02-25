@@ -43,7 +43,12 @@ public class EventOrganizer {
 							break;
 						}
 						System.out.println("Enter the First name, Last name, Years of Experience and Working domain:");
-						hall[++counter] = new Faculty(sc.next(), sc.next(), sc.nextInt(), sc.next());
+						Faculty f = new Faculty(sc.next(), sc.next(), sc.nextInt(), sc.next());
+						if (EventOrganizer.isPresent(hall, f, counter)){
+							System.out.println("The faculty is already registered.");
+							break;
+						}
+						hall[++counter] = f;
 						break;
 						
 					case 2:
@@ -52,7 +57,12 @@ public class EventOrganizer {
 							break;
 						}
 						System.out.println("Enter the First name, Last name, Grad year and Course name:");
-						hall[++counter] = new Student(sc.next(), sc.next(), sc.nextInt(), sc.next());
+						Student s = new Student(sc.next(), sc.next(), sc.nextInt(), sc.next());
+						if (EventOrganizer.isPresent(hall, s, counter)){
+							System.out.println("The student is already registered.");
+							break;
+						}
+						hall[++counter] = s;
 						break;
 						
 					case 3:
@@ -110,5 +120,12 @@ public class EventOrganizer {
 			sc.close();
 		}
 
+	}
+
+	public static boolean isPresent(Person[] seatsList, Person person, int length) {
+		for (int i=0 ; i<=length ; i++) {
+			if (seatsList[i].equals(person)) return true;
+		}
+		return false;
 	}
 }

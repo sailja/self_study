@@ -34,4 +34,11 @@ public abstract class Person {
 	}
 	
 	public abstract void introduce();
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Person)) return false;
+		Person p = (Person)o;
+		return this.firstName.equals(p.firstName) && this.lastName.equals(p.lastName);
+	}
 }
