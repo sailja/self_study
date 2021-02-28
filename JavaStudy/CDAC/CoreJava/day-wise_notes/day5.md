@@ -26,7 +26,9 @@ Implementing classes -- DB vendors --
 Oracle --Oracle DB engine --Implementation cls for Comnection i/f  
 Red Hat -- Mysql -- Implementation cls for Connection i/f  
 
-__NOTE:__ The java compiler adds public and abstract keywords before the interface method and public, static and final keywords before data members.
+__NOTE:__ The java compiler adds public and abstract keywords before the interface method and public, static and final keywords before data members.  
+
+__NOTE:__ The root of all interfaces is not the `java.lang.Object` class, as an interface cannot extend a class. But the interface has implicit access to all Object Class APIs.
 
 # Syntax of interface:
 ```javascript
@@ -232,10 +234,10 @@ interface printable{
 # Overriding 'equals()' method:
 <a name='overriding_equals_method'></a>
 
-`equals()` method is another important API from the Object class that needs to be overriden.  
-The need for that is that when comparing two objects for equality, we want the objects to the be compared on the basis of the parameters we define as by default, what this'll do is, this will compare hashcode of the two objects, and even though the two objects' contents are same, it'll show them as not equal.  
-Here `@Override` annotation has to be given or else the compiler will think this is an overloaded method since the signature is different compared to the defination given in the class defination and the compiler doesn't implement co-variance directly, and matches more to the `equals()` method of `java.lang.Object`.  
-__Important meaning:__ Returns true in case of reference equality. Syntax:
+- `equals()` method is another important API from the Object class that needs to be overriden.  
+- The need for that is that when comparing two objects for equality, we want the objects to the be compared on the basis of the parameters we define as by default, what this'll do is, this will compare hashcode of the two objects, and even though the two objects' contents are same, it'll show them as not equal.  
+- Here `@Override` annotation has to be given or else the compiler will think this is an overloaded method since the signature is different compared to the defination given in the class defination and the compiler doesn't implement co-variance directly, and matches more to the `equals()` method of `java.lang.Object`.  
+- __Important meaning:__ Returns true in case of reference equality. Syntax:
 ```java
 class Employee {
     //... Rest of the employee class defination
