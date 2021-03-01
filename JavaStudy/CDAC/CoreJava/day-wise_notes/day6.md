@@ -224,3 +224,36 @@ Important String class constructors:
 	eg . `String s=new String(bytes,3,4);`: String will contain bytes[3]-bytes[6]
 4. `String(char[] ch,int offset,int len);`
 5. `String(String s);`
+
+## String literal:
+When defining a String object using double quotes without new keyword. Example:
+```java
+String str = "Hello";
+
+// And if we perform operations like
+str.concat("Hi");	// Concats two strings.
+```
+The second statement doesn't actually update the original object, as Strings are immutable. The contents of str is still the same as it was earlier. It is still pointing to the object containing "Hello". The second statement creates a new String object with contents "HelloHi", but the reference is still pointing to the first object. If you want str reference to have the newer value, we'll have to update the statement as `str = str.concat("Hi");` Here the contents of the object doesn't change, but str is pointing to the newly created object. The similar happens if we use the String API methods like `toUpperCase()` & `replace()`.  
+
+## Checking String equality:
+Looking at the code should be self explainatory:
+```java
+String s1=new String("abc");
+String s2=new String("abc");
+String s3=new String("Abc");
+String s4 = "abc";
+String s5 = "abc";
+System.out.println(s1==s2);					//false
+System.out.println(s4==s5);					//true	--due to the concept of string literal pool
+System.out.println(s1.equals(s2));			//true
+System.out.println(s1.equals(s3));			//false
+System.out.println(s1.equalsIgnoreCase(s3));//true
+```
+
+## String Literal Pool:
+During the class loading phase, JVM will first load the user defined classes and then look for all the string literals, if it encounters any String literals, it'll load the String class into method area. And String Class maintains a __Literal/Constant String Pool__. And at the beginning, this pool is empty. This pool is going to maintain the references of literal Strings. So when JVM encounters a String defination using String literals, after the String class is loaded, it'll first create an Object on heap, and it's reference is stored in _Literal String Pool_. So the next time someone tries to use the same String literal, it'll just use the reference of the earlier Literal String and no new object is gonna be created. Until this point the main method hasn't started executtion. Thus an Object has been created of String type and the assignment of string literal references to the Literal String pool happens before even the execution of the program starts. Once the program execution starts, if the interpreter comes across statements of the same String literal defination. it'll copy the reference from the String literal pool. Summary:  
+![image](../additional_resources/string_literal.png)  
+
+In the above picture, the class pointer will point to the String class.  
+__NOTE:__ Pool above means the collection of Sting literals. Even after the references in the stack are nullified, the String literal object won't be marked for Garbage collector, as there are references still pointing to this object, in String Literal Pool. String Literal Pool is also called as __Constant Tables__.  
+
