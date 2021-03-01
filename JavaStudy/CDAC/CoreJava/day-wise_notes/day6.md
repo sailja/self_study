@@ -1,5 +1,6 @@
 # Contents:
 * [Exception Handling](#exception_handling)
+* [String Handling in Java](#string_handling)
 
 # Exception Handling:
 <a name='exception_handling'></a>
@@ -15,7 +16,7 @@
     - Stacktrace when the program broke down.  
 
 ## Exception handling Flow:
-![iamge](../additional_resources/exc_handling_flow.png)
+![image](../additional_resources/exc_handling_flow.png)
 
 ## Inheritence hierarchy of Exception Handling:
 ![image](../additional_resources/exc_inheritance_hierarchy.png)  
@@ -113,7 +114,10 @@ throw new AccountOverdrawnExc("funds too low...");
 | | __Legal:__ `throw new SocketException("msg",e);` |
 | | __Legal:__ `throw new InvalidInputException("invalid email");` |  
 
-## Building & using custom exceptions:
+## Creating & using custom exceptions:
+__Rules:__   
+1. Create a pkged public class which extends Throwable(not reco but legal)/Exception(recommended)/Error(not reco but legal)/RuntimeExc(not reco but legal)  
+2. CustExc(String msg) : overload the constr : to invoke the super-class construcot of the form `Exception (String msg)` OR  `CustExc(String msg,Throwable rootCause)` of super class method: `public Exception(String message,Throwable cause)`.  
 __Problem Statement:__ Check the certain speed of the vehicle, and alert the driver(using custom exceptions) if the speed is too high or too low.  
 __Implementation:__  For this two classes are needed:  
 * Exception class- for defining the exception. This needs to be a sub-class of Exception class.  
@@ -198,3 +202,25 @@ __NOTE:__ In the constructor of the custom exception class, we are giving only t
 - Custom Exception class- [EmpHandlingException.java](../code_files/day6/classwork/src/cust_excs/EmpHandlingException.java)  
 - Validation Rules class- [ValidationRule.java](../code_files/day6/classwork/src/utils/ValidationRules.java)  
 - Tester class- [TestEmpOrg.java](../code_files/day6/classwork/src/com/app/tester/TestEmpOrg.java)
+
+# String Handling in Java:
+<a name='string_handling'></a>
+
+In Java, String handling can be performed using three classes. Primarily:  
+- String class  
+- StringBuilder class
+- StringBuffer class
+
+More about these classes:  
+![image](../additional_resources/string_overview.png)  
+__NOTE:__ String class is immutable, but both StringBuilder & StringBuffer are mutable. StringBuilder & StringBuffer has capability/API to grow/shrink the object structure.  
+__NOTE:__ Here when it says this is inherently threadsafe, it's because in order to access the object by any thread, we don't have to apply any locks, since it is immutable anyways and the threads are not able to change anything.  
+
+## String class API:
+Important String class constructors:  
+1. `String(byte[] bytes);`: byte[] -> String converter  
+2. `String(char[] chars);`: char[] -> String converter  
+3. `String (byte[] bytes,int offset,int len);`: byte[] -> String converter from the specified offset, specified len no of bytes will be converted.  
+	eg . `String s=new String(bytes,3,4);`: String will contain bytes[3]-bytes[6]
+4. `String(char[] ch,int offset,int len);`
+5. `String(String s);`
